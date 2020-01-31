@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace WonderAPI.Controllers.Account
 {
+    /// <summary>
+    /// Represent Member business entity
+    /// </summary>
     public class Member
     {
         public int ID { get; set; }
@@ -17,6 +20,10 @@ namespace WonderAPI.Controllers.Account
         public DateTime DateOfBirth { get; set; }
     }
 
+
+    /// <summary>
+    /// Represent MemberInfo model, it's actually a Member model, but without password
+    /// </summary>
     public class MemberInfo
     {
         public string Name { get; set; }
