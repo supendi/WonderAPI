@@ -6,6 +6,7 @@ namespace WonderAPI.Controllers.Account
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExceptionFilter]
     public class MemberController : ControllerBase
     {
         [HttpPost]
