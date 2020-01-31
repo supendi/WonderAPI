@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WonderAPI.Entities;
 
 namespace WonderAPI.Controllers.Account
@@ -7,22 +8,41 @@ namespace WonderAPI.Controllers.Account
     [ApiController]
     public class MemberController : ControllerBase
     {
+        [HttpPost]
+        public MemberInfo CreateMember([FromBody]Member member)
+        {
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
+            {
+                var existingMember = svc.RegisterNewMember(member);
+                return new MemberInfo
+                {
+                    Name = existingMember.Name,
+                    Email = existingMember.Email,
+                    OptionalEmail = existingMember.OptionalEmail,
+                    MobileNumber = existingMember.MobileNumber,
+                    Gender = existingMember.Gender,
+                    DateOfBirth = existingMember.DateOfBirth
+                };
+            }
+        }
+
+        [Authorize]
         [HttpGet]
         [Route("{memberId}")]
         public MemberInfo GetMemberInfo([FromRoute]int memberId)
         {
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
-                return svc.GetMemberInfo(memberId);
-            }
-        }
-
-        [HttpPost]
-        public Member CreateMember([FromBody]Member member)
-        {
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
-            {
-                return svc.RegisterNewMember(member);
+                var existingMember = svc.GetMember(memberId);
+                return new MemberInfo
+                {
+                    Name = existingMember.Name,
+                    Email = existingMember.Email,
+                    OptionalEmail = existingMember.OptionalEmail,
+                    MobileNumber = existingMember.MobileNumber,
+                    Gender = existingMember.Gender,
+                    DateOfBirth = existingMember.DateOfBirth
+                };
             }
         }
 
