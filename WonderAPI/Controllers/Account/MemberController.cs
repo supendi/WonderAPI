@@ -9,7 +9,7 @@ namespace WonderAPI.Controllers.Account
     public class MemberController : ControllerBase
     {
         [HttpPost]
-        public MemberInfo CreateMember([FromBody]Member member)
+        public MemberInfo RegisterNewMember([FromBody]Member member)
         {
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
