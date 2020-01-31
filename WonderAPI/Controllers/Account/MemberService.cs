@@ -24,6 +24,10 @@ namespace WonderAPI.Controllers.Account
         }
     }
 
+
+    /// <summary>
+    /// This exeption will be thrown if user failed to login
+    /// </summary>
     public class AuthenticationException : AppException
     {
         public AuthenticationException(string msg) : base(msg)
