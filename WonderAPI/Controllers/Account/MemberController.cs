@@ -4,12 +4,12 @@ using WonderAPI.Pkg.Model;
 
 namespace WonderAPI.Controllers.Account
 {
-    [Route("api/[controller]")]
+    [Route("api/members")]
     [ApiController]
     public class MemberController : ControllerBase
     {
-        [HttpPost]
-        [Route("members")]
+        [HttpGet]
+        [Route("{memberId}")]
         public MemberInfo GetMemberInfo([FromRoute]int memberId)
         {
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new PasswordHasher(), new TokenGenerator()))
