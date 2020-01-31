@@ -86,7 +86,7 @@ namespace WonderAPI.Controllers.Account
         }
 
         /// <summary>
-        /// Updates an existing member
+        /// Updates an existing member, except password and email
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
@@ -95,7 +95,6 @@ namespace WonderAPI.Controllers.Account
             var existingMember = db.Member.Find(member.ID);
 
             existingMember.Name = member.Name;
-            existingMember.Email = member.Email;
             existingMember.OptionalEmail = member.OptionalEmail;
             existingMember.MobileNumber = member.MobileNumber;
             existingMember.Gender = member.Gender;
