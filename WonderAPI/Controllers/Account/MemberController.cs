@@ -12,7 +12,7 @@ namespace WonderAPI.Controllers.Account
         [Route("{memberId}")]
         public MemberInfo GetMemberInfo([FromRoute]int memberId)
         {
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new TokenGenerator()))
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
                 return svc.GetMemberInfo(memberId);
             }
@@ -21,7 +21,7 @@ namespace WonderAPI.Controllers.Account
         [HttpPost] 
         public Member CreatMember([FromBody]Member member)
         {
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new TokenGenerator()))
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
                 return svc.RegisterNewMember(member);
             }
