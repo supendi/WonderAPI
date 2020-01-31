@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WonderAPI.Controllers.Account
+namespace WonderAPI.Pkg.Model
 {
     /// <summary>
     /// Represent Member business entity
