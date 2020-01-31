@@ -121,9 +121,9 @@ namespace WonderAPI.Controllers.Account
             return new MemberInfo
             {
                 Name = existingMember.Name,
-                Email = existingMember.Name,
-                OptionalEmail = existingMember.Name,
-                MobileNumber = existingMember.Name,
+                Email = existingMember.Email,
+                OptionalEmail = existingMember.OptionalEmail,
+                MobileNumber = existingMember.MobileNumber,
                 Gender = existingMember.Gender,
                 DateOfBirth = existingMember.DateOfBirth
             };

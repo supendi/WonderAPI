@@ -4,7 +4,7 @@ using WonderAPI.Pkg;
 
 namespace WonderAPI.Controllers.Account
 {
-    [Route("api/members")]
+    [Route("api/[controller]")]
     [ApiController]
     public class MemberController : ControllerBase
     {
@@ -18,8 +18,7 @@ namespace WonderAPI.Controllers.Account
             }
         }
 
-        [HttpPost]
-        [Route("members")]
+        [HttpPost] 
         public Member CreatMember([FromBody]Member member)
         {
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new TokenGenerator()))
