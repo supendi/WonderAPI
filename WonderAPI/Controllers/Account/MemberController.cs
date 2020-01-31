@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WonderAPI.Entities;
-using WonderAPI.Pkg;
 
 namespace WonderAPI.Controllers.Account
 {
@@ -18,12 +17,22 @@ namespace WonderAPI.Controllers.Account
             }
         }
 
-        [HttpPost] 
-        public Member CreatMember([FromBody]Member member)
+        [HttpPost]
+        public Member CreateMember([FromBody]Member member)
         {
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
                 return svc.RegisterNewMember(member);
+            }
+        }
+
+        [HttpPost]
+        [Route("auth")]
+        public AuthInfo Authenticate([FromBody]LoginRequest loginRequest)
+        {
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
+            {
+                return svc.Authenticate(loginRequest);
             }
         }
     }

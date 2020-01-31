@@ -91,13 +91,13 @@ namespace WonderAPI.Controllers.Account
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public AuthInfo Authenticate(string email, string password)
+        public AuthInfo Authenticate(LoginRequest loginRequest)
         {
-            var member = memberRepository.GetByEmail(email);
+            var member = memberRepository.GetByEmail(loginRequest.Email);
             if (member == null)
                 throw new AuthenticationException("Invalid email or password.");
 
-            if (passwordHasher.Verify(password, member.Password))
+            if (!passwordHasher.Verify(loginRequest.Password, member.Password))
                 throw new AuthenticationException("Invalid email or password.");
 
             var newToken = tokenGenerator.Generate(member);

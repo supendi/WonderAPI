@@ -27,7 +27,7 @@ namespace WonderAPI.Controllers.Account
                 var jwtSecret = System.Environment.GetEnvironmentVariable("JwtSecret");
                 secretKey = jwtSecret;
                 if (secretKey == null)
-                    secretKey = "WonderLabs";
+                    secretKey = "akusayangkamuselamanyah";
             }
 
             return secretKey;
@@ -40,21 +40,22 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public string Generate(Member member)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(GetSecretKey());
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
+            var jwtKey = Encoding.ASCII.GetBytes(GetSecretKey());
+            var securityKey = new SymmetricSecurityKey(jwtKey);
+
+            var newToken = new JwtSecurityToken(
+                claims: new Claim[]
                 {
                     new Claim("name", member.Name),
                     new Claim("dateOfBirth", member.DateOfBirth.ToString()),
                     new Claim("gender", member.Gender),
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+                },
+                notBefore: new DateTimeOffset(DateTime.Now).DateTime,
+                expires: DateTime.Now.AddHours(1),
+                signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256)
+                );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(newToken);
             return tokenString;
         }
     }

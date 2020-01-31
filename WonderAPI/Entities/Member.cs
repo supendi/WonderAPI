@@ -45,7 +45,7 @@ namespace WonderAPI.Entities
     /// <summary>
     /// Represent the login model
     /// </summary>
-    public class LoginModel
+    public class LoginRequest
     {
         public string Email { get; set; }
         public string Password { get; set; }
