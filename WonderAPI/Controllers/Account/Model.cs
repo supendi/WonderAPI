@@ -33,4 +33,22 @@ namespace WonderAPI.Controllers.Account
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
     }
+
+
+    /// <summary>
+    /// Represent the login model
+    /// </summary>
+    public class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
+    /// <summary>
+    /// Represent the response model if a user successfully authenticated
+    /// </summary>
+    public class AuthInfo
+    {
+        public string Token { get; set; } 
+    }
 }
