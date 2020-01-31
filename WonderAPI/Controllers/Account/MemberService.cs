@@ -43,7 +43,7 @@ namespace WonderAPI.Controllers.Account
 
 
     /// <summary>
-    /// This exception will be thrown if duplicate email found on registration or update member
+    /// This exception will be thrown if duplicate email found while registering or updating a member
     /// </summary>
     public class DuplicateEmailException : AppException
     {
