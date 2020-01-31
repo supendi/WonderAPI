@@ -2,7 +2,7 @@
 
 namespace WonderAPI.Entities
 {
-    public class WonderDBContext : DbContext
+    public class WonderDbContext : DbContext
     {
         public DbSet<Member> Member { get; set; }
 

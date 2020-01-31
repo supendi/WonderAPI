@@ -44,8 +44,8 @@ namespace WonderAPI.Controllers.Account
     /// </summary>
     public class MemberRepository : IMemberRepository
     {
-        WonderDBContext db;
-        public MemberRepository(WonderDBContext db)
+        WonderDbContext db;
+        public MemberRepository(WonderDbContext db)
         {
             this.db = db;
         }
