@@ -35,16 +35,15 @@ namespace WonderAPI.Controllers.Account
         }
     }
 
+    /// <summary>
+    /// Provide the Member business functionality based on requirement such as create, update and get member info.
+    /// </summary>
     public class MemberService : IDisposable
     {
         IMemberRepository memberRepository;
         IPasswordHasher passwordHasher;
         ITokenGenerator tokenGenerator;
 
-        /// <summary>
-        /// Provide the Member business functionality based on requirement such as create, update and get member info.
-        /// </summary>
-        /// <param name="memberRepository"></param>
         public MemberService(IMemberRepository memberRepository, IPasswordHasher passwordHasher, ITokenGenerator tokenGenerator)
         {
             this.memberRepository = memberRepository;
