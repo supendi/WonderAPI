@@ -16,6 +16,7 @@ namespace WonderAPI.Controllers.Account
                 var newRegisteredMember = svc.RegisterNewMember(member);
                 return new MemberInfo
                 {
+                    ID = newRegisteredMember.ID,
                     Name = newRegisteredMember.Name,
                     Email = newRegisteredMember.Email,
                     OptionalEmail = newRegisteredMember.OptionalEmail,
@@ -36,6 +37,7 @@ namespace WonderAPI.Controllers.Account
                 var existingMember = svc.GetMember(memberId);
                 return new MemberInfo
                 {
+                    ID = existingMember.ID,
                     Name = existingMember.Name,
                     Email = existingMember.Email,
                     OptionalEmail = existingMember.OptionalEmail,

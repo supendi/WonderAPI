@@ -69,7 +69,7 @@ namespace WonderAPI.Controllers.Account
         }
 
         /// <summary>
-        /// Updates an existing member, but not including its password
+        /// Updates an existing member, but not including its password and its email
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
