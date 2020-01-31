@@ -144,6 +144,23 @@ namespace WonderAPI.Controllers.Account
             };
         }
 
+        public MemberInfo GetMemberInfo(int memberID)
+        {
+            var existingMember = memberRepository.GetById(memberID);
+            if (existingMember == null)
+                throw new UserNotFoundException($"User is not found");
+
+            return new MemberInfo
+            {
+                Name = existingMember.Name,
+                Email = existingMember.Name,
+                OptionalEmail = existingMember.Name,
+                MobileNumber = existingMember.Name,
+                Gender = existingMember.Gender,
+                DateOfBirth = existingMember.DateOfBirth
+            };
+        }
+
 
         /// <summary>
         /// This dispose will call the repository dispose method

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using WonderAPI.Pkg;
+using WonderAPI.Pkg.Model;
 
 namespace WonderAPI.Controllers.Account
 {
@@ -11,5 +8,24 @@ namespace WonderAPI.Controllers.Account
     [ApiController]
     public class MemberController : ControllerBase
     {
+        [HttpPost]
+        [Route("members")]
+        public MemberInfo GetMemberInfo([FromRoute]int memberId)
+        {
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new PasswordHasher(), new TokenGenerator()))
+            {
+                return svc.GetMemberInfo(memberId);
+            }
+        }
+
+        [HttpPost]
+        [Route("members")]
+        public Member CreatMember([FromBody]Member member)
+        {
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new PasswordHasher(), new TokenGenerator()))
+            {
+                return svc.RegisterNewMember(member);
+            }
+        }
     }
 }

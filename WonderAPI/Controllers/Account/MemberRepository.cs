@@ -60,9 +60,9 @@ namespace WonderAPI.Controllers.Account
             var existingMember = db.Members.Find(member.ID);
 
             existingMember.Name = member.Name;
-            existingMember.Email = member.Name;
-            existingMember.OptionalEmail = member.Name;
-            existingMember.MobileNumber = member.Name;
+            existingMember.Email = member.Email;
+            existingMember.OptionalEmail = member.OptionalEmail;
+            existingMember.MobileNumber = member.MobileNumber;
             existingMember.Gender = member.Gender;
             existingMember.DateOfBirth = member.DateOfBirth;
 
