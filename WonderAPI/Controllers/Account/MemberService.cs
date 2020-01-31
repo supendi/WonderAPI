@@ -71,14 +71,23 @@ namespace WonderAPI.Controllers.Account
         /// <summary>
         /// Updates an existing member, but not including its password and its email
         /// </summary>
-        /// <param name="member"></param>
+        /// <param name="updateRequest"></param>
         /// <returns></returns>
-        public Member UpdateMember(Member member)
+        public Member UpdateMember(MemberUpdateRequest updateRequest)
         {
-            var existingMember = memberRepository.GetById(member.ID);
+            var existingMember = memberRepository.GetById(updateRequest.ID);
             if (existingMember == null)
                 throw new UserNotFoundException($"User is not found");
 
+            var member = new Member
+            {
+                ID = updateRequest.ID,
+                Name = updateRequest.Name,
+                OptionalEmail = updateRequest.OptionalEmail,
+                MobileNumber = updateRequest.MobileNumber,
+                Gender = updateRequest.Gender,
+                DateOfBirth = updateRequest.DateOfBirth
+            };
             return memberRepository.Update(member);
         }
 

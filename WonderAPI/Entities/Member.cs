@@ -34,6 +34,25 @@ namespace WonderAPI.Entities
         public DateTime DateOfBirth { get; set; }
     }
 
+    /// <summary>
+    /// Represent update member request model
+    /// </summary>
+    public class MemberUpdateRequest
+    {
+        public int ID { get; set; }
+        [Required]
+        public string Name { get; set; } 
+
+        public string OptionalEmail { get; set; }
+
+        [Required]
+        public string MobileNumber { get; set; }
+        [Required]
+        public string Gender { get; set; }
+        [Required]
+        public DateTime DateOfBirth { get; set; }
+    }
+
 
     /// <summary>
     /// Represent MemberInfo model, it's actually a Member model, but without password

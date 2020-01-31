@@ -52,11 +52,11 @@ namespace WonderAPI.Controllers.Account
 
         [Authorize]
         [HttpPut]
-        public MemberInfo UpdateMember([FromBody]Member member)
+        public MemberInfo UpdateMember([FromBody]MemberUpdateRequest updateRequest)
         {
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
-                var updatedMember = svc.UpdateMember(member);
+                var updatedMember = svc.UpdateMember(updateRequest);
                 return new MemberInfo
                 {
                     ID = updatedMember.ID,
