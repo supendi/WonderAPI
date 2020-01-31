@@ -74,7 +74,7 @@ namespace WonderAPI.Controllers.Account
         {
             var retrievedUser = memberRepository.GetByEmail(member.Email);
             if (retrievedUser != null && retrievedUser.Email == member.Email)
-                throw new DuplicateEmailException($"Email '{member.Email}' already registerd");
+                throw new DuplicateEmailException($"Email '{member.Email}' already registered");
 
             var newMember = memberRepository.Add(member);
             return new MemberInfo
