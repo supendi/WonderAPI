@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
+using System.Collections.Generic;
 
 namespace WonderAPI.Pkg
 {
@@ -6,7 +7,7 @@ namespace WonderAPI.Pkg
     {
         public override void OnException(ExceptionContext context)
         {
-            object validationResult;
+            object exceptionResult;
             if (context.Exception is AppException)
             {
                 context.HttpContext.Response.StatusCode = 400;
@@ -14,14 +15,11 @@ namespace WonderAPI.Pkg
                 // handle explicit 'known' API errors
                 var ex = context.Exception as AppException;
                 context.Exception = null;
-                validationResult = ex.ValidationResult;
-                if (validationResult == null)
+                exceptionResult = new
                 {
-                    validationResult = new
-                    {
-                        errorMessage = ex.Message
-                    };
-                }
+                    message = ex.Message,
+                    errors = new List<object>()
+                };
             }
             else
             {
@@ -36,14 +34,14 @@ namespace WonderAPI.Pkg
                 string stack = context.Exception.StackTrace;
 #endif
 
-                validationResult = new ValidationResult("Something went error");
+                exceptionResult = new ValidationResult("Something went error");
 
 
                 // handle logging here
             }
 
             // always return a JSON result
-            context.Result = new Microsoft.AspNetCore.Mvc.JsonResult(validationResult);
+            context.Result = new Microsoft.AspNetCore.Mvc.JsonResult(exceptionResult);
 
             base.OnException(context);
         }

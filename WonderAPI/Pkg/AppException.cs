@@ -19,11 +19,11 @@ namespace WonderAPI.Pkg
     /// </summary>
     public class ValidationResult
     {
-        public string ErrorMessage { get; set; }
+        public string Message { get; set; }
         public List<FieldError> Errors { get; set; } = new List<FieldError>();
         public ValidationResult(string errorMessage)
         {
-            ErrorMessage = errorMessage;
+            Message = errorMessage;
         }
     }
 
@@ -32,15 +32,9 @@ namespace WonderAPI.Pkg
     /// </summary>
     public class AppException : Exception
     {
-        public ValidationResult ValidationResult { get; set; }
 
         public AppException()
         {
-        }
-
-        public AppException(ValidationResult validationResult)
-        {
-            ValidationResult = validationResult;
         }
 
         public AppException(string message) : base(message)
@@ -53,6 +47,16 @@ namespace WonderAPI.Pkg
 
         protected AppException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
+        }
+    }
+
+    public class ValidationException : AppException
+    {
+        public ValidationResult ValidationResult { get; set; }
+
+        public ValidationException(ValidationResult validationResult)
+        {
+            ValidationResult = validationResult;
         }
     }
 }
