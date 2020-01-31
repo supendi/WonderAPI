@@ -11,15 +11,20 @@ namespace WonderAPI.Pkg
     {
         public string Field { get; set; }
         public string ErrorMessage { get; set; }
-        public List<FieldError> SubErrors { get; set; } = new List<FieldError>(); 
+        public List<FieldError> SubErrors { get; set; } = new List<FieldError>();
     }
 
     /// <summary>
     /// Represent validation result, containing list of errors. When model validation failed, server will response with this model.
     /// </summary>
-    public class ValidationResult : FieldError
+    public class ValidationResult
     {
+        public string ErrorMessage { get; set; }
         public List<FieldError> Errors { get; set; } = new List<FieldError>();
+        public ValidationResult(string errorMessage)
+        {
+            ErrorMessage = errorMessage;
+        }
     }
 
     /// <summary>
