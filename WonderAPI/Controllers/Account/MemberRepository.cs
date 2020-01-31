@@ -70,7 +70,7 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public Member GetByEmail(string email)
         {
-            var member = db.Member.Where(m => m.Email == email).FirstOrDefault();
+            var member = db.Member.SingleOrDefault(m => m.Email == email);
             return member;
         }
 
