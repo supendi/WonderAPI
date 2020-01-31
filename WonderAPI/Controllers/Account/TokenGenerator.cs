@@ -1,6 +1,6 @@
 ﻿using WonderAPI.Entities;
 
-namespace WonderAPI.Pkg
+namespace WonderAPI.Controllers.Account
 {
     public interface ITokenGenerator
     {

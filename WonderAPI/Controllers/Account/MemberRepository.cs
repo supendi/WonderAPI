@@ -57,7 +57,7 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public Member Add(Member member)
         {
-            db.Members.Add(member);
+            db.Member.Add(member);
             db.SaveChanges();
             return member;
         }
@@ -70,7 +70,7 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public Member GetByEmail(string email)
         {
-            var member = db.Members.Where(m => m.Email == email).FirstOrDefault();
+            var member = db.Member.Where(m => m.Email == email).FirstOrDefault();
             return member;
         }
 
@@ -81,7 +81,7 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public Member GetById(int memberID)
         {
-            var member = db.Members.Find(memberID);
+            var member = db.Member.Find(memberID);
             return member;
         }
 
@@ -92,7 +92,7 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public Member Update(Member member)
         {
-            var existingMember = db.Members.Find(member.ID);
+            var existingMember = db.Member.Find(member.ID);
 
             existingMember.Name = member.Name;
             existingMember.Email = member.Email;

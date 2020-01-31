@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WonderAPI.Pkg
+namespace WonderAPI.Controllers.Account
 {
     /// <summary>
     /// Interface to hash a password
