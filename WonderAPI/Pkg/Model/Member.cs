@@ -1,10 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WonderAPI.Pkg.Model
 {
+    /// <summary>
+    /// Gender enumeration
+    /// </summary>
+    public enum Gender
+    {
+        Male = 1,
+        Female = 2,
+        Other = 3
+    }
+
     /// <summary>
     /// Represent Member business entity
     /// </summary>
@@ -49,6 +56,6 @@ namespace WonderAPI.Pkg.Model
     /// </summary>
     public class AuthInfo
     {
-        public string Token { get; set; } 
+        public string Token { get; set; }
     }
 }
