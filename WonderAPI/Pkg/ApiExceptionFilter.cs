@@ -6,19 +6,28 @@ namespace WonderAPI.Pkg
     {
         public override void OnException(ExceptionContext context)
         {
-            ValidationResult validationResult;
+            object validationResult;
             if (context.Exception is AppException)
             {
+                context.HttpContext.Response.StatusCode = 400;
+
                 // handle explicit 'known' API errors
                 var ex = context.Exception as AppException;
                 context.Exception = null;
                 validationResult = ex.ValidationResult;
-
-                context.HttpContext.Response.StatusCode = 400;
+                if (validationResult == null)
+                {
+                    validationResult = new
+                    {
+                        errorMessage = ex.Message
+                    };
+                }
             }
             else
             {
                 // Unhandled errors
+
+                context.HttpContext.Response.StatusCode = 500;
 #if !DEBUG
                 var msg = "An unhandled error occurred.";                
                 string stack = null;
@@ -29,7 +38,6 @@ namespace WonderAPI.Pkg
 
                 validationResult = new ValidationResult("Something went error");
 
-                context.HttpContext.Response.StatusCode = 500;
 
                 // handle logging here
             }
