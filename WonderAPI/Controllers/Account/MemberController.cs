@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WonderAPI.Entities;
 using WonderAPI.Pkg;
-using WonderAPI.Pkg.Model;
 
 namespace WonderAPI.Controllers.Account
 {

@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WonderAPI.Pkg.Model;
+﻿using Microsoft.EntityFrameworkCore; 
 
-namespace WonderAPI.Pkg
+namespace WonderAPI.Entities
 {
     public class WonderDBContext : DbContext
     {

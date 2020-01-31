@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WonderAPI.Pkg.Model
+namespace WonderAPI.Entities
 {
     /// <summary>
     /// Gender enumeration
