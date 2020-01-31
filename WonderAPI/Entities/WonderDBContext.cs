@@ -2,7 +2,7 @@
 
 namespace WonderAPI.Entities
 {
-    public class WonderDbContext : DbContext
+    public class WonderDBContext : DbContext
     {
         public DbSet<Member> Member { get; set; }
 
@@ -18,7 +18,6 @@ namespace WonderAPI.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           
             optionsBuilder
                .UseSqlServer(GetConnectionString());
         }
