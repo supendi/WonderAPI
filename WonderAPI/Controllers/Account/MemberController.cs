@@ -13,15 +13,15 @@ namespace WonderAPI.Controllers.Account
         {
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
-                var existingMember = svc.RegisterNewMember(member);
+                var newRegisteredMember = svc.RegisterNewMember(member);
                 return new MemberInfo
                 {
-                    Name = existingMember.Name,
-                    Email = existingMember.Email,
-                    OptionalEmail = existingMember.OptionalEmail,
-                    MobileNumber = existingMember.MobileNumber,
-                    Gender = existingMember.Gender,
-                    DateOfBirth = existingMember.DateOfBirth
+                    Name = newRegisteredMember.Name,
+                    Email = newRegisteredMember.Email,
+                    OptionalEmail = newRegisteredMember.OptionalEmail,
+                    MobileNumber = newRegisteredMember.MobileNumber,
+                    Gender = newRegisteredMember.Gender,
+                    DateOfBirth = newRegisteredMember.DateOfBirth
                 };
             }
         }
