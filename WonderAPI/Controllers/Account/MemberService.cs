@@ -37,6 +37,7 @@ namespace WonderAPI.Controllers.Account
 
     /// <summary>
     /// Provide the Member business functionality based on requirement such as create, update and get member info.
+    /// It implements IDisposable, the main reason is to dispose the repository object.
     /// </summary>
     public class MemberService : IDisposable
     {
