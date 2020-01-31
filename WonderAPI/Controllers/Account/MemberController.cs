@@ -50,20 +50,20 @@ namespace WonderAPI.Controllers.Account
 
         [Authorize]
         [HttpPut]
-        [Route("{memberId}")]
         public MemberInfo UpdateMember([FromBody]Member member)
         {
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
-                var existingMember = svc.UpdateMember(member);
+                var updatedMember = svc.UpdateMember(member);
                 return new MemberInfo
                 {
-                    Name = existingMember.Name,
-                    Email = existingMember.Email,
-                    OptionalEmail = existingMember.OptionalEmail,
-                    MobileNumber = existingMember.MobileNumber,
-                    Gender = existingMember.Gender,
-                    DateOfBirth = existingMember.DateOfBirth
+                    ID = updatedMember.ID,
+                    Name = updatedMember.Name,
+                    Email = updatedMember.Email,
+                    OptionalEmail = updatedMember.OptionalEmail,
+                    MobileNumber = updatedMember.MobileNumber,
+                    Gender = updatedMember.Gender,
+                    DateOfBirth = updatedMember.DateOfBirth
                 };
             }
         }

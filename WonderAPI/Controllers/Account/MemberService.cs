@@ -79,10 +79,6 @@ namespace WonderAPI.Controllers.Account
             if (existingMember == null)
                 throw new UserNotFoundException($"User is not found");
 
-            var retrievedMember = memberRepository.GetByEmail(member.Email);
-            if (retrievedMember != null && retrievedMember.ID == member.ID)
-                throw new DuplicateEmailException($"Email '{member.Email}' is duplicate");
-
             return memberRepository.Update(member);
         }
 
