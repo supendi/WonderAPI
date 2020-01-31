@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WonderAPI.Entities
 {
@@ -18,12 +19,18 @@ namespace WonderAPI.Entities
     public class Member
     {
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Email { get; set; }
         public string OptionalEmail { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
         public string MobileNumber { get; set; }
+        [Required]
         public string Gender { get; set; }
+        [Required]
         public DateTime DateOfBirth { get; set; }
     }
 
@@ -48,7 +55,9 @@ namespace WonderAPI.Entities
     /// </summary>
     public class LoginRequest
     {
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Password { get; set; }
     }
 

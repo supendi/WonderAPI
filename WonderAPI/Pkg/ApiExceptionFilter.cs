@@ -13,13 +13,20 @@ namespace WonderAPI.Pkg
                 context.HttpContext.Response.StatusCode = 400;
 
                 // handle explicit 'known' API errors
-                var ex = context.Exception as AppException;
-                context.Exception = null;
+                var ex = context.Exception as AppException; 
                 exceptionResult = new
                 {
                     message = ex.Message,
                     errors = new List<object>()
                 };
+            }
+            if (context.Exception is ValidationException)
+            {
+                context.HttpContext.Response.StatusCode = 400;
+
+                // handle explicit 'known' API errors
+                var ex = context.Exception as ValidationException; 
+                exceptionResult = ex.ValidationResult;
             }
             else
             {
