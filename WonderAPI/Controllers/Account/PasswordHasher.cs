@@ -14,7 +14,7 @@ namespace WonderAPI.Controllers.Account
     }
 
     /// <summary>
-    /// Implements IPasswordHasher
+    /// Implements IPasswordHasher and it use Pbkdf2 Algorithm
     /// </summary>
     public class Pbkdf2Hasher : IPasswordHasher
     {
