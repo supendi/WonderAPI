@@ -144,6 +144,11 @@ namespace WonderAPI.Controllers.Account
             };
         }
 
+        /// <summary>
+        /// Return member info by using its ID
+        /// </summary>
+        /// <param name="memberID"></param>
+        /// <returns></returns>
         public MemberInfo GetMemberInfo(int memberID)
         {
             var existingMember = memberRepository.GetById(memberID);
