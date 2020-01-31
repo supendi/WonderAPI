@@ -97,7 +97,7 @@ namespace WonderAPI.Controllers.Account
             if (member == null)
                 throw new AuthenticationException("Invalid email or password.");
 
-            if (member.Password != passwordHasher.Hash(password))
+            if (passwordHasher.Verify(password, member.Password))
                 throw new AuthenticationException("Invalid email or password.");
 
             var newToken = tokenGenerator.Generate(member);
