@@ -1,8 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
-using BCrypt;
-
-namespace WonderAPI.Controllers.Account
+﻿namespace WonderAPI.Controllers.Account
 {
     /// <summary>
     /// Interface to hash a password
