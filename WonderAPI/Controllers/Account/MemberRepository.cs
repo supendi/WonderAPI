@@ -119,14 +119,14 @@ namespace WonderAPI.Controllers.Account
     }
 
     /// <summary>
-    /// In memory repository member storage
+    /// In memory member repository which use memory as storage.
     /// </summary>
     public class MemberInmemRepository : IMemberRepository
     {
         public List<Member> Members { get; set; }
 
         /// <summary>
-        /// Get last ID, or current ID. Ordered by ID desc
+        /// Get last ID, or current ID. Will return the biggest number
         /// </summary>
         /// <returns></returns>
         private int GetLastID()
