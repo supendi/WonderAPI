@@ -76,25 +76,84 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void UpdateMemberTest()
         {
-            Assert.Fail();
+            var service = new MemberService(repo, hasher, tokenGenerator);
+            var newMember = service.RegisterNewMember(new Entities.Member()
+            {
+                Name = "John Doe",
+                Email = "john.doe@email.com",
+                OptionalEmail = "",
+                DateOfBirth = DateTime.Parse("1999-01-01"),
+                Gender = "Male",
+                MobileNumber = "",
+                Password = "ASuperDuperStrongPasswordThatNoOneCanHack.YesItUseADot."
+            });
+
+            var existingMember = service.GetMember(newMember.ID);
+            existingMember.Name = "Changed name";
+            existingMember.MobileNumber = "08123";
+            var updatedMember = service.UpdateMember(new Entities.MemberUpdateRequest()
+            {
+                ID = existingMember.ID,
+                Name = existingMember.Name,
+                OptionalEmail = existingMember.OptionalEmail,
+                DateOfBirth = existingMember.DateOfBirth,
+                Gender = existingMember.Gender,
+                MobileNumber = existingMember.MobileNumber,
+            });
+
+            var fecthedMember = service.GetMember(updatedMember.ID);
+            Assert.AreEqual(fecthedMember.Name, updatedMember.Name);
+            Assert.AreEqual(fecthedMember.MobileNumber, updatedMember.MobileNumber);
         }
 
         [TestMethod()]
         public void AuthenticateTest()
         {
-            Assert.Fail();
+            var service = new MemberService(repo, hasher, tokenGenerator);
+            var plainPassword = "ASuperDuperStrongPasswordThatNoOneCanHack.YesItUseADot.";
+            var registrant = new Entities.Member()
+            {
+                Name = "John Doe",
+                Email = "john.doe@email.com",
+                OptionalEmail = "",
+                DateOfBirth = DateTime.Parse("1999-01-01"),
+                Gender = "Male",
+                MobileNumber = "",
+                Password = plainPassword
+            };
+            service.RegisterNewMember(registrant);
+            var authInfo = service.Authenticate(new Entities.LoginRequest
+            {
+                Email = registrant.Email,
+                Password = plainPassword
+            });
+            Assert.IsTrue(!string.IsNullOrEmpty(authInfo.Token));
         }
 
         [TestMethod()]
         public void GetMemberTest()
-        {
-            Assert.Fail();
+        { 
+            var service = new MemberService(repo, hasher, tokenGenerator);
+            var plainPassword = "ASuperDuperStrongPasswordThatNoOneCanHack.YesItUseADot.";
+            var registrant = new Entities.Member()
+            {
+                Name = "John Doe",
+                Email = "john.doe@email.com",
+                OptionalEmail = "",
+                DateOfBirth = DateTime.Parse("1999-01-01"),
+                Gender = "Male",
+                MobileNumber = "",
+                Password = plainPassword
+            };
+            service.RegisterNewMember(registrant);
+            var existingMember = service.GetMember(registrant.ID);
+            Assert.IsNotNull(existingMember);
+            Assert.IsNotNull(existingMember.ID ==1);
         }
 
         [TestMethod()]
         public void DisposeTest()
         {
-            Assert.Fail();
         }
     }
 }
