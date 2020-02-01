@@ -2,7 +2,7 @@
 Senja Solusi Test - Web API
 
 ## Env
-There are two variable can/should be set in environment variables:
+There are two variables can/should be set in environment variables:
 1. Connection String. 
    It contains database connection string. If null, default value will be used, and it's hard coded.
    Env name/key = 'WonderDB'
