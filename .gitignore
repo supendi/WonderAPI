@@ -1,5 +1,5 @@
 WonderAPI/bin
 WonderAPI/obj
 ./.vs
-WonderAPI/WonderAPITests/bin
-WonderAPI/WonderAPITests/obj
+WonderAPITests/bin
+WonderAPITests/obj
