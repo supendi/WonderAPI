@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "f976e06d-b2f0-43db-af40-1d68df43ffe8",
+		"name": "Wonder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Member",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoicGVuZGkiLCJiaXJ0aGRhdGUiOiIwMS8wMS8xOTgwIDAwOjAwOjAwIiwiZ2VuZGVyIjoiTWFsZSIsIm5iZiI6MTU4MDUyMzQ5MywiZXhwIjoxNTgwNTI3MDkzfQ.geT_5219RG5vViz0Vi7es1_W5mEdePQ1pDgAp1a_Ius",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/member/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"member",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"name\": \"pendi\",\r\n    \"email\": \"pendi@email.com\",\r\n    \"optionalEmail\": \"\",\r\n    \"password\": \"pendi123\",\r\n    \"mobileNumber\": \"0813\",\r\n    \"gender\": \"\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/member",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"member"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"pendi@email.com\",\n    \"password\": \"pendi123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/member/auth",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"member",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Member",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoicGVuZGkiLCJiaXJ0aGRhdGUiOiIwMS8wMS8xOTgwIDAwOjAwOjAwIiwiZ2VuZGVyIjoiTWFsZSIsIm5iZiI6MTU4MDUyMzQ5MywiZXhwIjoxNTgwNTI3MDkzfQ.geT_5219RG5vViz0Vi7es1_W5mEdePQ1pDgAp1a_Ius",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Pendie Ajah\", \r\n    \"optionalEmail\": \"\", \r\n    \"gender\": \"Laki\",\r\n    \"mobileNumber\": \"123\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/member",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"member"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
