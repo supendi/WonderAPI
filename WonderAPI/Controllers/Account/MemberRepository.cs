@@ -116,7 +116,7 @@ namespace WonderAPI.Controllers.Account
     }
 
     /// <summary>
-    /// In memory member storage
+    /// In memory repository member storage
     /// </summary>
     public class MemberInmemRepository : IMemberRepository
     {
