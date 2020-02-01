@@ -122,6 +122,10 @@ namespace WonderAPI.Controllers.Account
     {
         private List<Member> members;
 
+        /// <summary>
+        /// Get last ID, or current ID. Ordered by ID desc
+        /// </summary>
+        /// <returns></returns>
         private int GetLastID()
         {
             if (members == null || members.Count == 0)
@@ -131,16 +135,29 @@ namespace WonderAPI.Controllers.Account
             return members.OrderByDescending(x => x.ID).FirstOrDefault().ID;
         }
 
+        /// <summary>
+        /// Get next auto ID
+        /// </summary>
+        /// <returns></returns>
         private int GetNextID()
         {
             return GetLastID() + 1;
         }
 
+        /// <summary>
+        /// Create new inmem instance with initial data
+        /// </summary>
+        /// <param name="members"></param>
         public MemberInmemRepository(List<Member> members)
         {
             this.members = members;
         }
 
+        /// <summary>
+        /// Add new member into memory
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         public Member Add(Member member)
         {
             member.ID = GetNextID();
@@ -148,16 +165,39 @@ namespace WonderAPI.Controllers.Account
             return member;
         }
 
+        /// <summary>
+        /// Get member by its email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public Member GetByEmail(string email)
         {
+            if (members == null || members.Count == 0)
+            {
+                return null;
+            }
             return members.FirstOrDefault(x => x.Email == email);
         }
 
+        /// <summary>
+        /// Get member by its ID
+        /// </summary>
+        /// <param name="memberID"></param>
+        /// <returns></returns>
         public Member GetById(int memberID)
         {
+            if (members == null || members.Count == 0)
+            {
+                return null;
+            }
             return members.FirstOrDefault(x => x.ID == memberID);
         }
 
+        /// <summary>
+        /// Updates existing member
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         public Member Update(Member member)
         {
             foreach (var element in members)
@@ -175,6 +215,9 @@ namespace WonderAPI.Controllers.Account
             return null;
         }
 
+        /// <summary>
+        /// Dispose data
+        /// </summary>
         public void Dispose()
         {
             this.members = null;
