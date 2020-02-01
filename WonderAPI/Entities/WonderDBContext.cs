@@ -4,11 +4,14 @@ namespace WonderAPI.Entities
 {
     public class WonderDBContext : DbContext
     {
+        private string connString;
         public DbSet<Member> Member { get; set; }
 
         private string GetConnectionString()
         {
-            var connString = System.Environment.GetEnvironmentVariable("WonderDB");
+            if (string.IsNullOrEmpty(connString)) 
+                connString = System.Environment.GetEnvironmentVariable("WonderDB");
+
             if (connString == null)
             {
                 connString = @"Data Source=.\sqlexpress; Initial Catalog=Wonder; Integrated Security=true;";

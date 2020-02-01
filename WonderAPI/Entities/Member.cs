@@ -20,16 +20,28 @@ namespace WonderAPI.Entities
     {
         public int ID { get; set; }
         [Required]
+        [MaxLength(500)]
         public string Name { get; set; }
+
         [Required]
+        [MaxLength(255)]
         public string Email { get; set; }
+
+        [MaxLength(255)]
         public string OptionalEmail { get; set; }
+
         [Required]
+        [MaxLength(1000)]
         public string Password { get; set; }
+
         [Required]
+        [MaxLength(24)]
         public string MobileNumber { get; set; }
+
         [Required]
+        [MaxLength(10)]
         public string Gender { get; set; }
+
         [Required]
         public DateTime DateOfBirth { get; set; }
     }

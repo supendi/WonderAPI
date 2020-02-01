@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WonderAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,12 @@ namespace WonderAPI.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    OptionalEmail = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: false),
-                    MobileNumber = table.Column<string>(nullable: false),
-                    Gender = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 500, nullable: false),
+                    Email = table.Column<string>(maxLength: 255, nullable: false),
+                    OptionalEmail = table.Column<string>(maxLength: 255, nullable: true),
+                    Password = table.Column<string>(maxLength: 1000, nullable: false),
+                    MobileNumber = table.Column<string>(maxLength: 24, nullable: false),
+                    Gender = table.Column<string>(maxLength: 10, nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
