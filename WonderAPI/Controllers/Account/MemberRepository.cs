@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
 
@@ -111,6 +112,72 @@ namespace WonderAPI.Controllers.Account
         public void Dispose()
         {
             db.Dispose();
+        }
+    }
+
+    /// <summary>
+    /// In memory member storage
+    /// </summary>
+    public class MemberInmemRepository : IMemberRepository
+    {
+        private List<Member> members;
+
+        private int GetLastID()
+        {
+            if (members == null || members.Count == 0)
+            {
+                return 0;
+            }
+            return members.OrderByDescending(x => x.ID).FirstOrDefault().ID;
+        }
+
+        private int GetNextID()
+        {
+            return GetLastID() + 1;
+        }
+
+        public MemberInmemRepository(List<Member> members)
+        {
+            this.members = members;
+        }
+
+        public Member Add(Member member)
+        {
+            member.ID = GetNextID();
+            this.members.Add(member);
+            return member;
+        }
+
+        public Member GetByEmail(string email)
+        {
+            return members.FirstOrDefault(x => x.Email == email);
+        }
+
+        public Member GetById(int memberID)
+        {
+            return members.FirstOrDefault(x => x.ID == memberID);
+        }
+
+        public Member Update(Member member)
+        {
+            foreach (var element in members)
+            {
+                if (element.ID == member.ID)
+                {
+                    element.Name = member.Name;
+                    element.OptionalEmail = member.Name;
+                    element.MobileNumber = member.Name;
+                    element.DateOfBirth = member.DateOfBirth;
+                    element.Gender = member.Gender;
+                    return element;
+                }
+            }
+            return null;
+        }
+
+        public void Dispose()
+        {
+            this.members = null;
         }
     }
 }
