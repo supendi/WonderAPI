@@ -95,13 +95,16 @@ namespace WonderAPI.Controllers.Account
         {
             var existingMember = db.Member.Find(member.ID);
 
-            existingMember.Name = member.Name;
-            existingMember.OptionalEmail = member.OptionalEmail;
-            existingMember.MobileNumber = member.MobileNumber;
-            existingMember.Gender = member.Gender;
-            existingMember.DateOfBirth = member.DateOfBirth;
+            if (existingMember != null)
+            {
+                existingMember.Name = member.Name;
+                existingMember.OptionalEmail = member.OptionalEmail;
+                existingMember.MobileNumber = member.MobileNumber;
+                existingMember.Gender = member.Gender;
+                existingMember.DateOfBirth = member.DateOfBirth;
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
 
             return existingMember;
         }
