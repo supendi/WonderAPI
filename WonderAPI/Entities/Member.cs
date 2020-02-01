@@ -65,8 +65,9 @@ namespace WonderAPI.Entities
         public string OptionalEmail { get; set; }
 
         [Required]
-        [MaxLength(1000)]
-        public string Password { get; set; }
+        [MaxLength(24)]
+        [Phone]
+        public string MobileNumber { get; set; }
 
         [Required]
         [MaxLength(10)]

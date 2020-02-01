@@ -12,7 +12,7 @@
     /// <summary>
     /// Implements IPasswordHasher and it use Bcrypt Algorithm
     /// </summary>
-    public class Pbkdf2Hasher : IPasswordHasher
+    public class BCryptHasher : IPasswordHasher
     {
         public string Hash(string password)
         {

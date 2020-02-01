@@ -83,6 +83,7 @@ namespace WonderAPI.Controllers.Account
                 ID = updateRequest.ID,
                 Name = updateRequest.Name,
                 OptionalEmail = updateRequest.OptionalEmail,
+                MobileNumber = updateRequest.MobileNumber,
                 Gender = updateRequest.Gender,
                 DateOfBirth = updateRequest.DateOfBirth
             };

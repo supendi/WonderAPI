@@ -14,7 +14,7 @@ namespace WonderAPI.Controllers.Account
         public MemberInfo RegisterNewMember([FromBody]Member member)
         {
             ModelValidator.Validate(member);
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new BCryptHasher(), new JWTGenerator()))
             {
                 var newRegisteredMember = svc.RegisterNewMember(member);
                 return new MemberInfo
@@ -35,7 +35,7 @@ namespace WonderAPI.Controllers.Account
         [Route("{memberId}")]
         public MemberInfo GetMemberInfo([FromRoute]int memberId)
         {
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new BCryptHasher(), new JWTGenerator()))
             {
                 var existingMember = svc.GetMember(memberId);
                 return new MemberInfo
@@ -56,7 +56,7 @@ namespace WonderAPI.Controllers.Account
         public MemberInfo UpdateMember([FromBody]MemberUpdateRequest updateRequest)
         {
             ModelValidator.Validate(updateRequest);
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new BCryptHasher(), new JWTGenerator()))
             {
                 var updatedMember = svc.UpdateMember(updateRequest);
                 return new MemberInfo
@@ -77,7 +77,7 @@ namespace WonderAPI.Controllers.Account
         public AuthInfo Authenticate([FromBody]LoginRequest loginRequest)
         {
             ModelValidator.Validate(loginRequest);
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
+            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new BCryptHasher(), new JWTGenerator()))
             {
                 return svc.Authenticate(loginRequest);
             }
