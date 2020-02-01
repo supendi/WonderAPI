@@ -19,12 +19,14 @@ namespace WonderAPI.Entities
     public class Member
     {
         public int ID { get; set; }
+
         [Required]
         [MaxLength(500)]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(255)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [MaxLength(255)]
@@ -36,6 +38,7 @@ namespace WonderAPI.Entities
 
         [Required]
         [MaxLength(24)]
+        [Phone]
         public string MobileNumber { get; set; }
 
         [Required]
@@ -43,6 +46,7 @@ namespace WonderAPI.Entities
         public string Gender { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime DateOfBirth { get; set; }
     }
 
@@ -52,16 +56,24 @@ namespace WonderAPI.Entities
     public class MemberUpdateRequest
     {
         public int ID { get; set; }
-        [Required]
-        public string Name { get; set; } 
 
+        [Required]
+        [MaxLength(500)]
+        public string Name { get; set; }
+
+        [MaxLength(255)]
         public string OptionalEmail { get; set; }
 
         [Required]
-        public string MobileNumber { get; set; }
+        [MaxLength(1000)]
+        public string Password { get; set; }
+
         [Required]
+        [MaxLength(10)]
         public string Gender { get; set; }
+
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime DateOfBirth { get; set; }
     }
 
@@ -87,7 +99,9 @@ namespace WonderAPI.Entities
     public class LoginRequest
     {
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
+
         [Required]
         public string Password { get; set; }
     }
