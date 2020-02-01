@@ -1,8 +1,8 @@
 # WonderAPI
 Senja Solusi Test - Web API
 
-##Env
-There are two variable can be set in environment variables:
+## Env
+There are two variable can/should be set in environment variables:
 1. Connection String. 
    It contains database connection string. If null, default value will be used, and it's hard coded.
    Env name/key = 'WonderDB'
@@ -10,7 +10,7 @@ There are two variable can be set in environment variables:
    Contains secret key used for encoding the JWT token. If null, default value will be used.
    Env name/key = 'JwtSecret'
 
-##Step to run the project
+## Step to run the project
 1. Build the project. And lets the package manager resolves the project dependencies
 2. Run migration. run 'update-database' command in package manager console
 3. Make sure environment variables has been set.
