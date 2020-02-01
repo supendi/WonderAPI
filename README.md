@@ -11,7 +11,7 @@ There are two variables can/should be set in environment variables:
    Env name/key = 'JwtSecret'
 
 ## Step to run the project
-1. Build the project. And lets the package manager resolves the project dependencies
+1. Build the project. And let the package manager resolves the project dependencies
 2. Run migration. run 'update-database' command in package manager console
 3. Make sure environment variables has been set.
    Or if you want to manually hard coded this one, here's the files:
