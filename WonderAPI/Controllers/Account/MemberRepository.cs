@@ -123,7 +123,7 @@ namespace WonderAPI.Controllers.Account
     /// </summary>
     public class MemberInmemRepository : IMemberRepository
     {
-        private List<Member> members;
+        public List<Member> Members { get; set; }
 
         /// <summary>
         /// Get last ID, or current ID. Ordered by ID desc
@@ -131,11 +131,11 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         private int GetLastID()
         {
-            if (members == null || members.Count == 0)
+            if (Members == null || Members.Count == 0)
             {
                 return 0;
             }
-            return members.OrderByDescending(x => x.ID).FirstOrDefault().ID;
+            return Members.OrderByDescending(x => x.ID).FirstOrDefault().ID;
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace WonderAPI.Controllers.Account
         /// <param name="members"></param>
         public MemberInmemRepository(List<Member> members)
         {
-            this.members = members;
+            this.Members = members;
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace WonderAPI.Controllers.Account
         public Member Add(Member member)
         {
             member.ID = GetNextID();
-            this.members.Add(member);
+            this.Members.Add(member);
             return member;
         }
 
@@ -175,11 +175,11 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public Member GetByEmail(string email)
         {
-            if (members == null || members.Count == 0)
+            if (Members == null || Members.Count == 0)
             {
                 return null;
             }
-            return members.FirstOrDefault(x => x.Email == email);
+            return Members.FirstOrDefault(x => x.Email == email);
         }
 
         /// <summary>
@@ -189,11 +189,11 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public Member GetById(int memberID)
         {
-            if (members == null || members.Count == 0)
+            if (Members == null || Members.Count == 0)
             {
                 return null;
             }
-            return members.FirstOrDefault(x => x.ID == memberID);
+            return Members.FirstOrDefault(x => x.ID == memberID);
         }
 
         /// <summary>
@@ -203,13 +203,13 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public Member Update(Member member)
         {
-            foreach (var element in members)
+            foreach (var element in Members)
             {
                 if (element.ID == member.ID)
                 {
                     element.Name = member.Name;
-                    element.OptionalEmail = member.Name;
-                    element.MobileNumber = member.Name;
+                    element.OptionalEmail = member.OptionalEmail;
+                    element.MobileNumber = member.MobileNumber;
                     element.DateOfBirth = member.DateOfBirth;
                     element.Gender = member.Gender;
                     return element;
@@ -223,7 +223,7 @@ namespace WonderAPI.Controllers.Account
         /// </summary>
         public void Dispose()
         {
-            this.members = null;
+            this.Members = null;
         }
     }
 }
