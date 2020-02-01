@@ -9,13 +9,16 @@ namespace WonderAPI.Entities
 
         private string GetConnectionString()
         {
-            if (string.IsNullOrEmpty(connString)) 
+            if (string.IsNullOrEmpty(connString))
+            {
                 connString = System.Environment.GetEnvironmentVariable("WonderDB");
 
-            if (connString == null)
-            {
-                connString = @"Data Source=.\sqlexpress; Initial Catalog=Wonder; Integrated Security=true;";
+                if (connString == null)
+                {
+                    connString = @"Data Source=.\sqlexpress; Initial Catalog=Wonder; Integrated Security=true;";
+                }
             }
+               
             return connString;
         }
 
