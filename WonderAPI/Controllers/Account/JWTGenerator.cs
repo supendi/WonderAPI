@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -7,11 +9,22 @@ using WonderAPI.Entities;
 
 namespace WonderAPI.Controllers.Account
 {
+    /// <summary>
+    /// Access token interface
+    /// </summary>
     public interface ITokenGenerator
     {
+        /// <summary>
+        /// Generate access token
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         string Generate(Member member);
     }
 
+    /// <summary>
+    /// JWTGenerator implements ITokenGenerator, generates JWT
+    /// </summary>
     public class JWTGenerator : ITokenGenerator
     {
         static string secretKey = "";
@@ -31,6 +44,34 @@ namespace WonderAPI.Controllers.Account
             }
 
             return secretKey;
+        }
+
+        /// <summary>
+        /// Register authorization to API
+        /// </summary>
+        /// <param name="services"></param>
+        public static void RegisterAuth(IServiceCollection services)
+        {
+            var jwtKey = Encoding.ASCII.GetBytes(GetSecretKey());
+            var securityKey = new SymmetricSecurityKey(jwtKey);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = securityKey,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
         }
 
         /// <summary>

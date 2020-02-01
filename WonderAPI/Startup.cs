@@ -1,16 +1,9 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using WonderAPI.Controllers.Account;
-using WonderAPI.Pkg;
 
 namespace WonderAPI
 {
@@ -28,26 +21,7 @@ namespace WonderAPI
         {
             services.AddControllers();
 
-            var jwtKey = Encoding.ASCII.GetBytes(JWTGenerator.GetSecretKey());
-            var securityKey = new SymmetricSecurityKey(jwtKey);
-
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = securityKey,
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            JWTGenerator.RegisterAuth(services);
 
             services.AddMvc();
         }
@@ -57,11 +31,13 @@ namespace WonderAPI
         {
             if (env.IsDevelopment())
             {
-                // app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
             }
+
             app.UseRouting();
 
             app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
