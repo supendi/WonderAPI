@@ -74,6 +74,42 @@ namespace WonderAPI.Controllers.Account.Tests
         }
 
         [TestMethod()]
+        public void RegisterNewMemberFailTest()
+        {
+            try
+            {
+                var service = new MemberService(repo, hasher, tokenGenerator);
+                var newMember = service.RegisterNewMember(new Entities.Member()
+                {
+                    ID = 100,
+                    Name = "John Doe",
+                    Email = "john.doe@email.com",
+                    OptionalEmail = "",
+                    DateOfBirth = DateTime.Parse("1999-01-01"),
+                    Gender = "Male",
+                    MobileNumber = "",
+                    Password = "ASuperDuperStrongPasswordThatNoOneCanHack.YesItUseADot."
+                });
+
+                var newMember2 = service.RegisterNewMember(new Entities.Member()
+                {
+                    ID = 100,
+                    Name = "John Doe",
+                    Email = "john.doe@email.com",
+                    OptionalEmail = "",
+                    DateOfBirth = DateTime.Parse("1999-01-01"),
+                    Gender = "Male",
+                    MobileNumber = "",
+                    Password = "ASuperDuperStrongPasswordThatNoOneCanHack.YesItUseADot."
+                });
+            }
+            catch (Exception ex)
+            {
+                Assert.IsTrue(ex is DuplicateEmailException);
+            }
+        }
+
+        [TestMethod()]
         public void UpdateMemberTest()
         {
             var service = new MemberService(repo, hasher, tokenGenerator);
@@ -107,6 +143,42 @@ namespace WonderAPI.Controllers.Account.Tests
         }
 
         [TestMethod()]
+        public void UpdateMemberFailTest()
+        {
+            try
+            {
+                var service = new MemberService(repo, hasher, tokenGenerator);
+                var newMember = service.RegisterNewMember(new Entities.Member()
+                {
+                    Name = "John Doe",
+                    Email = "john.doe@email.com",
+                    OptionalEmail = "",
+                    DateOfBirth = DateTime.Parse("1999-01-01"),
+                    Gender = "Male",
+                    MobileNumber = "",
+                    Password = "ASuperDuperStrongPasswordThatNoOneCanHack.YesItUseADot."
+                });
+
+                var existingMember = service.GetMember(newMember.ID);
+                existingMember.Name = "Changed name";
+                existingMember.MobileNumber = "08123";
+                var updatedMember = service.UpdateMember(new Entities.MemberUpdateRequest()
+                {
+                    ID = 2,
+                    Name = existingMember.Name,
+                    OptionalEmail = existingMember.OptionalEmail,
+                    DateOfBirth = existingMember.DateOfBirth,
+                    Gender = existingMember.Gender,
+                    MobileNumber = existingMember.MobileNumber,
+                });
+            }
+            catch (Exception ex)
+            {
+                Assert.IsTrue(ex is UserNotFoundException);
+            }
+        }
+
+        [TestMethod()]
         public void AuthenticateTest()
         {
             var service = new MemberService(repo, hasher, tokenGenerator);
@@ -132,7 +204,7 @@ namespace WonderAPI.Controllers.Account.Tests
 
         [TestMethod()]
         public void GetMemberTest()
-        { 
+        {
             var service = new MemberService(repo, hasher, tokenGenerator);
             var plainPassword = "ASuperDuperStrongPasswordThatNoOneCanHack.YesItUseADot.";
             var registrant = new Entities.Member()
@@ -148,7 +220,7 @@ namespace WonderAPI.Controllers.Account.Tests
             service.RegisterNewMember(registrant);
             var existingMember = service.GetMember(registrant.ID);
             Assert.IsNotNull(existingMember);
-            Assert.IsNotNull(existingMember.ID ==1);
+            Assert.IsNotNull(existingMember.ID == 1);
         }
 
         [TestMethod()]
