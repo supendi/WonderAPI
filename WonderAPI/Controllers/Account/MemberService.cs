@@ -9,7 +9,7 @@ namespace WonderAPI.Controllers.Account
     /// </summary>
     public class DuplicateEmailException : AppException
     {
-        public DuplicateEmailException(string msg) : base(msg)
+        public DuplicateEmailException(string email) : base($"Email '{email}' already registered")
         {
         }
     }
@@ -19,7 +19,7 @@ namespace WonderAPI.Controllers.Account
     /// </summary>
     public class UserNotFoundException : AppException
     {
-        public UserNotFoundException(string msg) : base(msg)
+        public UserNotFoundException() : base($"User is not found")
         {
         }
     }
@@ -30,7 +30,7 @@ namespace WonderAPI.Controllers.Account
     /// </summary>
     public class AuthenticationException : AppException
     {
-        public AuthenticationException(string msg) : base(msg)
+        public AuthenticationException() : base("Invalid email or password.")
         {
         }
     }
@@ -61,7 +61,7 @@ namespace WonderAPI.Controllers.Account
         {
             var retrievedMember = memberRepository.GetByEmail(member.Email);
             if (retrievedMember != null && retrievedMember.Email == member.Email)
-                throw new DuplicateEmailException($"Email '{member.Email}' already registered");
+                throw new DuplicateEmailException(member.Email);
 
             member.Password = passwordHasher.Hash(member.Password);
 
@@ -77,7 +77,7 @@ namespace WonderAPI.Controllers.Account
         {
             var existingMember = memberRepository.GetById(updateRequest.ID);
             if (existingMember == null)
-                throw new UserNotFoundException($"User is not found");
+                throw new UserNotFoundException();
 
             var member = new Member
             {
@@ -101,10 +101,10 @@ namespace WonderAPI.Controllers.Account
         {
             var member = memberRepository.GetByEmail(loginRequest.Email);
             if (member == null)
-                throw new AuthenticationException("Invalid email or password.");
+                throw new AuthenticationException();
 
             if (!passwordHasher.Verify(loginRequest.Password, member.Password))
-                throw new AuthenticationException("Invalid email or password.");
+                throw new AuthenticationException();
 
             var newToken = tokenGenerator.Generate(member);
             return new AuthInfo
@@ -122,7 +122,7 @@ namespace WonderAPI.Controllers.Account
         {
             var existingMember = memberRepository.GetById(memberID);
             if (existingMember == null)
-                throw new UserNotFoundException($"User is not found");
+                throw new UserNotFoundException();
 
             return existingMember;
         }
