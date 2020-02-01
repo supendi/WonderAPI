@@ -10,8 +10,8 @@ using WonderAPI.Entities;
 namespace WonderAPI.Migrations
 {
     [DbContext(typeof(WonderDBContext))]
-    [Migration("20200201012942_initial")]
-    partial class initial
+    [Migration("20200201014004_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
