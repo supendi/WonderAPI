@@ -5,12 +5,13 @@ using WonderAPI.Pkg;
 
 namespace WonderAPI.Controllers.Account
 {
-    [Route("api/[controller]")]
+    [Route("api/members")]
     [ApiController]
     [ApiExceptionFilter]
     public class MemberController : ControllerBase
     {
         [HttpPost]
+        [Route("register")]
         public MemberInfo RegisterNewMember([FromBody]Member member)
         {
             ModelValidator.Validate(member);
