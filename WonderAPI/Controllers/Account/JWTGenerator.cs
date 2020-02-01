@@ -39,7 +39,7 @@ namespace WonderAPI.Controllers.Account
             {
                 var jwtSecret = System.Environment.GetEnvironmentVariable("JwtSecret");
                 secretKey = jwtSecret;
-                if (secretKey == null)
+                if (string.IsNullOrEmpty(secretKey))
                     secretKey = "akusayangkamuselamanyah";
             }
 
