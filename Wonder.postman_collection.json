@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoicGVuZGkiLCJiaXJ0aGRhdGUiOiIwMS8wMS8xOTgwIDAwOjAwOjAwIiwiZ2VuZGVyIjoiTWFsZSIsIm5iZiI6MTU4MDUyMzQ5MywiZXhwIjoxNTgwNTI3MDkzfQ.geT_5219RG5vViz0Vi7es1_W5mEdePQ1pDgAp1a_Ius",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW1iZXJJZCI6IjEiLCJnaXZlbl9uYW1lIjoicGVuZGkiLCJiaXJ0aGRhdGUiOiIwMS8wMS8xOTgwIDAwOjAwOjAwIiwiZ2VuZGVyIjoiTWFsZSIsIm5iZiI6MTU4MDU3MDU4MiwiZXhwIjoxNTgwNTc0MTgyfQ.uICNfDD1iWMXKYORIlYH_MoiXjQH60H18tlXMlhb8KI",
 							"type": "string"
 						}
 					]
@@ -27,14 +27,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/api/member/2",
+					"raw": "{{host}}/api/members/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"member",
-						"2"
+						"members",
+						"1"
 					]
 				}
 			},
@@ -54,7 +54,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \r\n    \"name\": \"pendi\",\r\n    \"email\": \"pendi@email.com\",\r\n    \"optionalEmail\": \"\",\r\n    \"password\": \"pendi123\",\r\n    \"mobileNumber\": \"0813\",\r\n    \"gender\": \"\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
+					"raw": "{ \r\n    \"name\": \"pendi\",\r\n    \"email\": \"pendi@email.com\",\r\n    \"optionalEmail\": \"\",\r\n    \"password\": \"pendi123\",\r\n    \"mobileNumber\": \"0813\",\r\n    \"gender\": \"laki\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -62,13 +62,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/member",
+					"raw": "{{host}}/api/members/register",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"member"
+						"members",
+						"register"
 					]
 				}
 			},
@@ -95,13 +96,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/member/auth",
+					"raw": "{{host}}/api/members/auth",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"member",
+						"members",
 						"auth"
 					]
 				}
@@ -116,7 +117,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXZlbl9uYW1lIjoicGVuZGkiLCJiaXJ0aGRhdGUiOiIwMS8wMS8xOTgwIDAwOjAwOjAwIiwiZ2VuZGVyIjoiTWFsZSIsIm5iZiI6MTU4MDUyMzQ5MywiZXhwIjoxNTgwNTI3MDkzfQ.geT_5219RG5vViz0Vi7es1_W5mEdePQ1pDgAp1a_Ius",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW1iZXJJZCI6IjEiLCJnaXZlbl9uYW1lIjoicGVuZGkiLCJiaXJ0aGRhdGUiOiIwMS8wMS8xOTgwIDAwOjAwOjAwIiwiZ2VuZGVyIjoiTWFsZSIsIm5iZiI6MTU4MDU3MDU4MiwiZXhwIjoxNTgwNTc0MTgyfQ.uICNfDD1iWMXKYORIlYH_MoiXjQH60H18tlXMlhb8KI",
 							"type": "string"
 						}
 					]
@@ -132,7 +133,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Pendie Ajah\", \r\n    \"optionalEmail\": \"\", \r\n    \"gender\": \"Laki\",\r\n    \"mobileNumber\": \"123\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Pendi\", \r\n    \"optionalEmail\": \"\", \r\n    \"gender\": \"Laki\",\r\n    \"mobileNumber\": \"123\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -140,13 +141,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/member",
+					"raw": "{{host}}/api/members",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"member"
+						"members"
 					]
 				}
 			},
