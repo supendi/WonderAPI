@@ -24,7 +24,6 @@ namespace WonderAPI.Controllers.Account
         }
     }
 
-
     /// <summary>
     /// This exeption will be thrown if user failed to login
     /// </summary>

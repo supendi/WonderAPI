@@ -13,6 +13,7 @@ namespace WonderAPI.Controllers.Account
         [HttpPost]
         public MemberInfo RegisterNewMember([FromBody]Member member)
         {
+            ModelValidator.Validate(member);
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
                 var newRegisteredMember = svc.RegisterNewMember(member);
@@ -54,6 +55,7 @@ namespace WonderAPI.Controllers.Account
         [HttpPut]
         public MemberInfo UpdateMember([FromBody]MemberUpdateRequest updateRequest)
         {
+            ModelValidator.Validate(updateRequest);
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
                 var updatedMember = svc.UpdateMember(updateRequest);
@@ -74,6 +76,7 @@ namespace WonderAPI.Controllers.Account
         [Route("auth")]
         public AuthInfo Authenticate([FromBody]LoginRequest loginRequest)
         {
+            ModelValidator.Validate(loginRequest);
             using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new Pbkdf2Hasher(), new JWTGenerator()))
             {
                 return svc.Authenticate(loginRequest);

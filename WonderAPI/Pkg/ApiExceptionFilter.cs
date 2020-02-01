@@ -8,26 +8,28 @@ namespace WonderAPI.Pkg
         public override void OnException(ExceptionContext context)
         {
             object exceptionResult;
-            if (context.Exception is AppException)
+
+            if (context.Exception is ValidationException || context.Exception is AppException)
             {
+                // handle explicit 'known' API errors
                 context.HttpContext.Response.StatusCode = 400;
 
-                // handle explicit 'known' API errors
-                var ex = context.Exception as AppException; 
-                exceptionResult = new
+                if (context.Exception is ValidationException)
                 {
-                    message = ex.Message,
-                    errors = new List<object>()
-                };
+                    var ex = context.Exception as ValidationException;
+                    exceptionResult = ex.ValidationResult;
+                }
+                else
+                {
+                    var ex = context.Exception as AppException;
+                    exceptionResult = new
+                    {
+                        message = ex.Message,
+                        errors = new List<object>()
+                    };
+                }
             }
-            if (context.Exception is ValidationException)
-            {
-                context.HttpContext.Response.StatusCode = 400;
 
-                // handle explicit 'known' API errors
-                var ex = context.Exception as ValidationException; 
-                exceptionResult = ex.ValidationResult;
-            }
             else
             {
                 // Unhandled errors
@@ -41,7 +43,7 @@ namespace WonderAPI.Pkg
                 string stack = context.Exception.StackTrace;
 #endif
 
-                exceptionResult = new ValidationResult("Something went error");
+                exceptionResult = new ValidationResult("Something went error.");
 
 
                 // handle logging here

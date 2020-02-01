@@ -50,7 +50,7 @@ namespace WonderAPI.Pkg
         }
     }
 
-    public class ValidationException : AppException
+    public class ValidationException : Exception
     {
         public ValidationResult ValidationResult { get; set; }
 
