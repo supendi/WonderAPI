@@ -13,7 +13,7 @@ There are two variables can/should be set in environment variables:
 ## Step to run the project
 1. Build the project.
    - Visual Studio (I use VS2019): Build and let the package manager resolves the project dependencies.
-   - CLI : run 'dotnet build' it will also resolves automatically resolves the project dependencies.
+   - CLI : run 'dotnet build' it will also automatically resolves the project dependencies.
 2. Run migration.
    - Visual Studio (I use VS2019) : run 'update-database' command in package manager console.
    - For CLI : run 'dotnet ef database update'. Make sure you are in 'WonderAPI' project directory while running the command line.
