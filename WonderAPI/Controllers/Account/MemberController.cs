@@ -5,19 +5,34 @@ using WonderAPI.Pkg;
 
 namespace WonderAPI.Controllers.Account
 {
+    /// <summary>
+    /// Member API entry point
+    /// </summary>
     [Route("api/members")]
     [ApiController]
     [ApiExceptionFilter]
     public class MemberController : ControllerBase
     {
+        MemberService memberService;
+
+        public MemberController(MemberService memberService)
+        {
+            this.memberService = memberService;
+        }
+
+        /// <summary>
+        /// Register a new member
+        /// </summary>
+        /// <param name="registrant"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("register")]
-        public MemberInfo RegisterNewMember([FromBody]Member member)
+        public MemberInfo RegisterNewMember([FromBody]Member registrant)
         {
-            ModelValidator.Validate(member);
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new BCryptHasher(), new JWTGenerator()))
+            ModelValidator.Validate(registrant);
+            using (memberService)
             {
-                var newRegisteredMember = svc.RegisterNewMember(member);
+                var newRegisteredMember = memberService.RegisterNewMember(registrant);
                 return new MemberInfo
                 {
                     ID = newRegisteredMember.ID,
@@ -31,14 +46,19 @@ namespace WonderAPI.Controllers.Account
             }
         }
 
+        /// <summary>
+        /// Get member by ID. Member ID value is taken from URL
+        /// </summary>
+        /// <param name="memberId"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpGet]
         [Route("{memberId}")]
         public MemberInfo GetMemberInfo([FromRoute]int memberId)
         {
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new BCryptHasher(), new JWTGenerator()))
+            using (memberService)
             {
-                var existingMember = svc.GetMember(memberId);
+                var existingMember = memberService.GetMember(memberId);
                 return new MemberInfo
                 {
                     ID = existingMember.ID,
@@ -52,14 +72,19 @@ namespace WonderAPI.Controllers.Account
             }
         }
 
+        /// <summary>
+        /// Updates an existing member
+        /// </summary>
+        /// <param name="updateRequest"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPut]
         public MemberInfo UpdateMember([FromBody]MemberUpdateRequest updateRequest)
         {
             ModelValidator.Validate(updateRequest);
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new BCryptHasher(), new JWTGenerator()))
+            using (memberService)
             {
-                var updatedMember = svc.UpdateMember(updateRequest);
+                var updatedMember = memberService.UpdateMember(updateRequest);
                 return new MemberInfo
                 {
                     ID = updatedMember.ID,
@@ -73,14 +98,19 @@ namespace WonderAPI.Controllers.Account
             }
         }
 
+        /// <summary>
+        /// Authorize user by providing username and password
+        /// </summary>
+        /// <param name="loginRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("auth")]
         public AuthInfo Authenticate([FromBody]LoginRequest loginRequest)
         {
             ModelValidator.Validate(loginRequest);
-            using (var svc = new MemberService(new MemberRepository(new WonderDBContext()), new BCryptHasher(), new JWTGenerator()))
+            using (memberService)
             {
-                return svc.Authenticate(loginRequest);
+                return memberService.Authenticate(loginRequest);
             }
         }
     }
