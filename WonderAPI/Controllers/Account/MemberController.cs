@@ -13,6 +13,11 @@ namespace WonderAPI.Controllers.Account
     [ApiExceptionFilter]
     public class MemberController : ControllerBase
     {
+        /// <summary>
+        /// When using this injected object, it is no need to use the 'using' keyword. 
+        /// Because, any dependencies that created by container, will be disposed by container too
+        /// see: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.1#overview-of-dependency-injection.
+        /// </summary>
         MemberService memberService;
 
         public MemberController(MemberService memberService)
@@ -30,20 +35,17 @@ namespace WonderAPI.Controllers.Account
         public MemberInfo RegisterNewMember([FromBody]Member registrant)
         {
             ModelValidator.Validate(registrant);
-            using (memberService)
+            var newRegisteredMember = memberService.RegisterNewMember(registrant);
+            return new MemberInfo
             {
-                var newRegisteredMember = memberService.RegisterNewMember(registrant);
-                return new MemberInfo
-                {
-                    ID = newRegisteredMember.ID,
-                    Name = newRegisteredMember.Name,
-                    Email = newRegisteredMember.Email,
-                    OptionalEmail = newRegisteredMember.OptionalEmail,
-                    MobileNumber = newRegisteredMember.MobileNumber,
-                    Gender = newRegisteredMember.Gender,
-                    DateOfBirth = newRegisteredMember.DateOfBirth
-                };
-            }
+                ID = newRegisteredMember.ID,
+                Name = newRegisteredMember.Name,
+                Email = newRegisteredMember.Email,
+                OptionalEmail = newRegisteredMember.OptionalEmail,
+                MobileNumber = newRegisteredMember.MobileNumber,
+                Gender = newRegisteredMember.Gender,
+                DateOfBirth = newRegisteredMember.DateOfBirth
+            };
         }
 
         /// <summary>
@@ -82,20 +84,17 @@ namespace WonderAPI.Controllers.Account
         public MemberInfo UpdateMember([FromBody]MemberUpdateRequest updateRequest)
         {
             ModelValidator.Validate(updateRequest);
-            using (memberService)
+            var updatedMember = memberService.UpdateMember(updateRequest);
+            return new MemberInfo
             {
-                var updatedMember = memberService.UpdateMember(updateRequest);
-                return new MemberInfo
-                {
-                    ID = updatedMember.ID,
-                    Name = updatedMember.Name,
-                    Email = updatedMember.Email,
-                    OptionalEmail = updatedMember.OptionalEmail,
-                    MobileNumber = updatedMember.MobileNumber,
-                    Gender = updatedMember.Gender,
-                    DateOfBirth = updatedMember.DateOfBirth
-                };
-            }
+                ID = updatedMember.ID,
+                Name = updatedMember.Name,
+                Email = updatedMember.Email,
+                OptionalEmail = updatedMember.OptionalEmail,
+                MobileNumber = updatedMember.MobileNumber,
+                Gender = updatedMember.Gender,
+                DateOfBirth = updatedMember.DateOfBirth
+            };
         }
 
         /// <summary>
@@ -108,10 +107,7 @@ namespace WonderAPI.Controllers.Account
         public AuthInfo Authenticate([FromBody]LoginRequest loginRequest)
         {
             ModelValidator.Validate(loginRequest);
-            using (memberService)
-            {
-                return memberService.Authenticate(loginRequest);
-            }
+            return memberService.Authenticate(loginRequest);
         }
     }
 }
