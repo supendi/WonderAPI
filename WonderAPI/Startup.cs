@@ -18,6 +18,20 @@ namespace WonderAPI
 
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// It disables automatic validation. Why is it turned off? Because I want a custom error validation response. So controller will calls Validator manually.
+        /// </summary>
+        /// <param name="services"></param>
+        private void DisableAutoValidation(IServiceCollection services)
+        {
+            //Disable auto validation
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -27,11 +41,7 @@ namespace WonderAPI
 
             JWTGenerator.RegisterAuth(services);
 
-            //Disable auto validation
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
+            DisableAutoValidation(services);
 
             services.AddMvc();
         }
@@ -56,7 +66,4 @@ namespace WonderAPI
             });
         }
     }
-
-
-
 }
