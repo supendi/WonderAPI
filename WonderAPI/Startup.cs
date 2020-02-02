@@ -19,7 +19,7 @@ namespace WonderAPI
         public IConfiguration Configuration { get; }
 
         /// <summary>
-        /// It disables automatic validation. Why is it turned off? Because I want a custom error validation response. So controller will calls Validator manually.
+        /// It disables automatic data annotation validation. Why is it turned off? Because I want a custom error validation response. So controller will calls Validator manually.
         /// </summary>
         /// <param name="services"></param>
         private void DisableAutoValidation(IServiceCollection services)
