@@ -13,17 +13,44 @@ namespace WonderAPI
     /// </summary>
     public class WireDI
     {
+        IServiceCollection services;
+
+        /// <summary>
+        /// Creates new instance of WireDI
+        /// </summary>
+        /// <param name="services"></param>
+        public WireDI(IServiceCollection services)
+        {
+            this.services = services;
+        }
+
+        /// <summary>
+        /// Injects db context
+        /// </summary>
+        private void InjectDBContext()
+        {
+            services.AddScoped<WonderDBContext, WonderDBContext>();
+        }
+
         /// <summary>
         /// Member controller dependencies injection
         /// </summary>
         /// <param name="services"></param>
-        public static void WireMemberService(IServiceCollection services)
+        private void WireMemberService()
         {
-            services.AddScoped<WonderDBContext, WonderDBContext>();
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IPasswordHasher, BCryptHasher>();
             services.AddScoped<ITokenGenerator, JWTGenerator>();
             services.AddScoped<MemberService, MemberService>();
+        }
+
+        /// <summary>
+        /// Inject all dependencies to all business services
+        /// </summary>
+        public void DoInjection()
+        {
+            InjectDBContext();
+            WireMemberService();
         }
     }
 }

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WonderAPI.Controllers.Account;
-using WonderAPI.Entities;
 
 namespace WonderAPI
 {
@@ -29,19 +28,19 @@ namespace WonderAPI
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
-
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            WireDI.WireMemberService(services);
-
-            services.AddControllers();
+            var wire = new WireDI(services);
+            wire.DoInjection();
 
             JWTGenerator.RegisterAuth(services);
 
             DisableAutoValidation(services);
+
+            services.AddControllers();
 
             services.AddMvc();
         }
