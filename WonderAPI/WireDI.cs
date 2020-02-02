@@ -9,7 +9,7 @@ using WonderAPI.Entities;
 namespace WonderAPI
 {
     /// <summary>
-    /// Wires business services instance. Managing DI for controllers.
+    /// Wires business services instance. Manages DI for controllers.
     /// </summary>
     public class WireDI
     {
