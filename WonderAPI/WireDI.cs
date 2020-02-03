@@ -53,7 +53,7 @@ namespace WonderAPI
         }
 
         /// <summary>
-        /// Inject all dependencies to all business services
+        /// Inject all dependencies to all controller
         /// </summary>
         public void DoInjection()
         {
