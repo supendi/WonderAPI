@@ -12,8 +12,10 @@ namespace WonderAPI.Controllers.Account.Tests
     [TestClass()]
     public class MemberControllerTests
     {
+        private JWTHandler jwtHandler = new JWTHandler();
         private MemberService GetMemberService()
         {
+
             var initialData = new List<Member>()
             {
                  new Member
@@ -36,7 +38,7 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void RegisterNewMemberTest()
         {
-            var ctrl = new MemberController(GetMemberService());
+            var ctrl = new MemberController(jwtHandler, GetMemberService());
             var newMember = ctrl.RegisterNewMember(new Member
             {
                 ID = 1,
@@ -58,8 +60,8 @@ namespace WonderAPI.Controllers.Account.Tests
         public void RegisterNewMemberFailValidationTest()
         {
             try
-            { 
-                var ctrl = new MemberController(GetMemberService());
+            {
+                var ctrl = new MemberController(jwtHandler, GetMemberService());
                 var newMember = ctrl.RegisterNewMember(new Member
                 {
                     ID = 1,
@@ -90,9 +92,9 @@ namespace WonderAPI.Controllers.Account.Tests
         {
             try
             {
-                var ctrl = new MemberController(GetMemberService());
+                var ctrl = new MemberController(jwtHandler, GetMemberService());
                 var newMember = ctrl.RegisterNewMember(new Member
-                { 
+                {
                     Name = "Yuni",
                     DateOfBirth = DateTime.Parse("1990-01-01"),
                     Email = "yuni@gmail.com",
@@ -112,7 +114,7 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void GetMemberInfoTest()
         {
-            var ctrl = new MemberController(GetMemberService());
+            var ctrl = new MemberController(jwtHandler, GetMemberService());
             var memberInfo = ctrl.GetMemberInfo(1);
             Assert.IsNotNull(memberInfo);
             Assert.IsTrue(memberInfo.Email == "yuni@gmail.com");
@@ -122,7 +124,7 @@ namespace WonderAPI.Controllers.Account.Tests
         {
             try
             {
-                var ctrl = new MemberController(GetMemberService());
+                var ctrl = new MemberController(jwtHandler, GetMemberService());
                 var memberInfo = ctrl.GetMemberInfo(2);
                 throw new Exception("You fail if you hit me.");
             }
@@ -135,7 +137,7 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void UpdateMemberTest()
         {
-            var ctrl = new MemberController(GetMemberService());
+            var ctrl = new MemberController(jwtHandler, GetMemberService());
 
             var updatedMember = ctrl.UpdateMember(new MemberUpdateRequest
             {
@@ -156,7 +158,7 @@ namespace WonderAPI.Controllers.Account.Tests
         {
             try
             {
-                var ctrl = new MemberController(GetMemberService());
+                var ctrl = new MemberController(jwtHandler, GetMemberService());
 
                 var updatedMember = ctrl.UpdateMember(new MemberUpdateRequest
                 {
@@ -180,7 +182,7 @@ namespace WonderAPI.Controllers.Account.Tests
         {
             try
             {
-                var ctrl = new MemberController(GetMemberService());
+                var ctrl = new MemberController(jwtHandler, GetMemberService());
 
                 var updatedMember = ctrl.UpdateMember(new MemberUpdateRequest
                 {
