@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using WonderAPI.Controllers.Account;
 
 namespace WonderAPI.Pkg
 {
@@ -9,11 +10,17 @@ namespace WonderAPI.Pkg
     /// </summary>
     public class ApiControllerBase : ControllerBase
     {
+        private ISecurityTokenHandler tokenHandler;
+
+        public ApiControllerBase(ISecurityTokenHandler tokenHandler)
+        {
+            this.tokenHandler = tokenHandler;
+        }
         /// <summary>
         /// Get token from current http request.
         /// </summary>
         /// <returns></returns>
-        public JwtSecurityToken GetJWTToken()
+        protected string GetAuthorizationHeaderValue()
         {
             var authHeaderValue = Request.Headers["Authorization"].FirstOrDefault();
             if (authHeaderValue == null)
@@ -21,30 +28,7 @@ namespace WonderAPI.Pkg
                 return null;
             }
             var accessToken = authHeaderValue.Replace("Bearer ", "");
-
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            var jwtToken = tokenHandler.ReadJwtToken(accessToken);
-            return jwtToken;
-        }
-
-        /// <summary>
-        /// Get token payload value by specified claim type/payload key
-        /// </summary>
-        /// <param name="claimType"></param>
-        /// <returns></returns>
-        public string GetTokenPayloadValue(string claimType)
-        {
-            var token = GetJWTToken();
-            if (token == null)
-            {
-                return null;
-            }
-            var claim = token.Claims.FirstOrDefault(x => x.Type == claimType);
-            if (claim == null)
-            {
-                return null;
-            }
-            return claim.Value;
+            return accessToken;
         }
 
         /// <summary>
@@ -53,17 +37,7 @@ namespace WonderAPI.Pkg
         /// <returns></returns>
         public int GetMemberIDFromToken()
         {
-            var memberIDFromToken = GetTokenPayloadValue(JwtRegisteredClaimNames.Sub);
-            if (string.IsNullOrEmpty(memberIDFromToken))
-            {
-                throw new AppException("Cannot read member ID from token.");
-            }
-            var parseOK = int.TryParse(memberIDFromToken, out int memberID);
-            if (!parseOK)
-            {
-                throw new AppException("Cannot parse member ID from token.");
-            }
-            return memberID;
+            return tokenHandler.GetSubValue(GetAuthorizationHeaderValue());
         }
     }
 }

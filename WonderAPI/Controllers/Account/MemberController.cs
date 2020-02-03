@@ -20,7 +20,7 @@ namespace WonderAPI.Controllers.Account
         /// </summary>
         MemberService memberService;
 
-        public MemberController(MemberService memberService)
+        public MemberController(ISecurityTokenHandler tokenHandler, MemberService memberService) : base(tokenHandler)
         {
             this.memberService = memberService;
         }
