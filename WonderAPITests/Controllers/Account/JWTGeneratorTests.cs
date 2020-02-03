@@ -14,8 +14,8 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void GenerateTest()
         {
-            var generator = new JWTGenerator();
-            var token = generator.Generate(new Entities.Member()
+            var generator = new JWTHandler();
+            var token = generator.GenerateAccessToken(new Entities.Member()
             {
                 ID = 1,
                 Name = "John Doe",
@@ -36,7 +36,7 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void GetSecretKeyTest()
         {
-            var key = JWTGenerator.GetSecretKey();
+            var key = JWTHandler.GetSecretKey();
             Assert.AreEqual(key, "akusayangkamuselamanyah");
         }
     }

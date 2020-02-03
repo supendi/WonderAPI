@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using WonderAPI.Entities;
@@ -10,22 +11,36 @@ using WonderAPI.Entities;
 namespace WonderAPI.Controllers.Account
 {
     /// <summary>
-    /// Access token generator interface
+    /// Specify functionality to handle Token
     /// </summary>
-    public interface ITokenGenerator
+    public interface ISecurityTokenHandler
     {
         /// <summary>
         /// Generate access token
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
-        string Generate(Member member);
+        string GenerateAccessToken(Member member);
+
+        /// <summary>
+        /// Generate a refresh token
+        /// </summary>
+        /// <returns></returns>
+        string GenerateRefreshToken();
+
+        /// <summary>
+        /// Get payload/claim value from an encoded access token.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="keyOrClaimType"></param>
+        /// <returns></returns>
+        string GetValue(string token, string keyOrClaimType);
     }
 
     /// <summary>
     /// JWTGenerator implements ITokenGenerator, generates JWT
     /// </summary>
-    public class JWTGenerator : ITokenGenerator
+    public class JWTHandler : ISecurityTokenHandler
     {
         static string secretKey = "";
         static SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(GetSecretKey()));
@@ -77,7 +92,7 @@ namespace WonderAPI.Controllers.Account
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
-        public string Generate(Member member)
+        public string GenerateAccessToken(Member member)
         {
             var newToken = new JwtSecurityToken(
                 claims: new Claim[]
@@ -94,6 +109,47 @@ namespace WonderAPI.Controllers.Account
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(newToken);
             return tokenString;
+        }
+
+        /// <summary>
+        /// Generates refresh token
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateRefreshToken()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
+        /// <summary>
+        /// Get payload/claim value from an encoded access token.
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <param name="keyOrClaimType"></param>
+        /// <returns></returns>
+        public string GetValue(string accessToken, string keyOrClaimType)
+        {
+            var jwt = Decode(accessToken);
+            if (jwt == null)
+            {
+                return null;
+            }
+            var claim = jwt.Claims.FirstOrDefault(x => x.Type == keyOrClaimType);
+            if (claim == null)
+            {
+                return null;
+            }
+            return claim.Value;
+        }
+
+        /// <summary>
+        /// Decode an encoded access token to JWT token.
+        /// </summary>
+        /// <returns></returns>
+        protected JwtSecurityToken Decode(string accessToken)
+        { 
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(accessToken);
+            return jwtToken;
         }
     }
 }

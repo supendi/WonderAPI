@@ -40,7 +40,7 @@ namespace WonderAPI
         {
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IPasswordHasher, BCryptHasher>();
-            services.AddScoped<ITokenGenerator, JWTGenerator>();
+            services.AddScoped<ISecurityTokenHandler, JWTHandler>();
             services.AddScoped<MemberService, MemberService>();
         }
 

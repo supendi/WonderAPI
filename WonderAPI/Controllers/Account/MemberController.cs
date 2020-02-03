@@ -119,17 +119,17 @@ namespace WonderAPI.Controllers.Account
             };
         }
 
-        /// <summary>
-        /// Authorize user by providing username and password
-        /// </summary>
-        /// <param name="loginRequest"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("auth")]
-        public AuthInfo Authenticate([FromBody]LoginRequest loginRequest)
-        {
-            ModelValidator.Validate(loginRequest);
-            return memberService.Authenticate(loginRequest);
-        }
+        ///// <summary>
+        ///// Authorize user by providing username and password
+        ///// </summary>
+        ///// <param name="loginRequest"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //[Route("auth")]
+        //public AuthInfo Authenticate([FromBody]LoginRequest loginRequest)
+        //{
+        //    ModelValidator.Validate(loginRequest);
+        //    return memberService.Authenticate(loginRequest);
+        //}
     }
 }

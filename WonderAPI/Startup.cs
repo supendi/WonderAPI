@@ -36,7 +36,7 @@ namespace WonderAPI
             var wire = new WireDI(services);
             wire.DoInjection();
 
-            JWTGenerator.RegisterAuth(services);
+            JWTHandler.RegisterAuth(services);
 
             DisableAutoValidation(services);
 

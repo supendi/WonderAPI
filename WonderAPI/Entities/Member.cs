@@ -112,6 +112,7 @@ namespace WonderAPI.Entities
     /// </summary>
     public class AuthInfo
     {
-        public string Token { get; set; }
+        public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

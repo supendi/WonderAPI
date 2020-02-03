@@ -25,16 +25,6 @@ namespace WonderAPI.Controllers.Account
     }
 
     /// <summary>
-    /// This exeption will be thrown if user failed to login
-    /// </summary>
-    public class AuthenticationException : AppException
-    {
-        public AuthenticationException() : base("Invalid email or password.")
-        {
-        }
-    }
-
-    /// <summary>
     /// Provide the Member business functionality based on requirement such as create, update and get member info.
     /// It implements IDisposable, the main reason is to dispose the repository object.
     /// </summary>
@@ -42,13 +32,11 @@ namespace WonderAPI.Controllers.Account
     {
         IMemberRepository memberRepository;
         IPasswordHasher passwordHasher;
-        ITokenGenerator tokenGenerator;
 
-        public MemberService(IMemberRepository memberRepository, IPasswordHasher passwordHasher, ITokenGenerator tokenGenerator)
+        public MemberService(IMemberRepository memberRepository, IPasswordHasher passwordHasher)
         {
             this.memberRepository = memberRepository;
             this.passwordHasher = passwordHasher;
-            this.tokenGenerator = tokenGenerator;
         }
 
         /// <summary>
@@ -88,28 +76,6 @@ namespace WonderAPI.Controllers.Account
                 DateOfBirth = updateRequest.DateOfBirth
             };
             return memberRepository.Update(member);
-        }
-
-        /// <summary>
-        /// Authenticates user by providing its email and password
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public AuthInfo Authenticate(LoginRequest loginRequest)
-        {
-            var member = memberRepository.GetByEmail(loginRequest.Email);
-            if (member == null)
-                throw new AuthenticationException();
-
-            if (!passwordHasher.Verify(loginRequest.Password, member.Password))
-                throw new AuthenticationException();
-
-            var newToken = tokenGenerator.Generate(member);
-            return new AuthInfo
-            {
-                Token = newToken
-            };
         }
 
         /// <summary>
