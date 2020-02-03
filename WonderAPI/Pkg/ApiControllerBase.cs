@@ -39,7 +39,7 @@ namespace WonderAPI.Pkg
             {
                 return null;
             }
-            var claim = token.Claims.Where(x => x.Type == claimType).FirstOrDefault();
+            var claim = token.Claims.FirstOrDefault(x => x.Type == claimType);
             if (claim == null)
             {
                 return null;
