@@ -50,6 +50,9 @@ namespace WonderAPI.Pkg
         }
     }
 
+    /// <summary>
+    /// This exception will be thrown if annotation validation fail/returns errors. See ModelValidator class in Pkg namespace
+    /// </summary>
     public class ValidationException : Exception
     {
         public ValidationResult ValidationResult { get; set; }
