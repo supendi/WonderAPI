@@ -35,6 +35,13 @@ namespace WonderAPI.Controllers.Account
         /// <param name="keyOrClaimType"></param>
         /// <returns></returns>
         string GetValue(string token, string keyOrClaimType);
+
+        /// <summary>
+        /// Get sub value (member id)
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        int GetSubValue(string token);
     }
 
     /// <summary>
@@ -118,6 +125,22 @@ namespace WonderAPI.Controllers.Account
         public string GenerateRefreshToken()
         {
             return Guid.NewGuid().ToString();
+        }
+
+        /// <summary>
+        /// Get sub value or member id
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public int GetSubValue(string accessToken)
+        {
+            var memberIdValue = GetValue(accessToken, "sub");
+            bool parseIsOk = int.TryParse(memberIdValue, out int memberID);
+            if (!parseIsOk)
+            {
+                throw new Exception("Cannot parse member id from token");
+            }
+            return memberID;
         }
 
         /// <summary>

@@ -122,7 +122,7 @@ namespace WonderAPI.Controllers.Account.Auth
                 throw new InvalidTokenException();
             }
 
-            var memberID = GetMemberIDFromAccessToken(tokenRecord.AccessToken);
+            var memberID = tokenHandler.GetSubValue(tokenRecord.AccessToken);
             var member = memberRepository.GetById(memberID);
             if (member == null)
                 throw new UserNotFoundException();
@@ -148,18 +148,7 @@ namespace WonderAPI.Controllers.Account.Auth
                 AccessToken = newAccessToken,
                 RefreshToken = newRefreshToken
             };
-        }
-
-        private int GetMemberIDFromAccessToken(string accessToken)
-        {
-            var memberIdValue = tokenHandler.GetValue(accessToken, "sub");
-            bool parseIsOk = int.TryParse(memberIdValue, out int memberID);
-            if (!parseIsOk)
-            {
-                throw new Exception("Cannot parse member id from token");
-            }
-            return memberID;
-        }
+        } 
 
         public void Dispose()
         {
