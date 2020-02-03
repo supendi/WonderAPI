@@ -117,19 +117,6 @@ namespace WonderAPI.Controllers.Account
                 Gender = updatedMember.Gender,
                 DateOfBirth = updatedMember.DateOfBirth
             };
-        }
-
-        ///// <summary>
-        ///// Authorize user by providing username and password
-        ///// </summary>
-        ///// <param name="loginRequest"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[Route("auth")]
-        //public AuthInfo Authenticate([FromBody]LoginRequest loginRequest)
-        //{
-        //    ModelValidator.Validate(loginRequest);
-        //    return memberService.Authenticate(loginRequest);
-        //}
+        } 
     }
 }

@@ -6,6 +6,7 @@ namespace WonderAPI.Entities
     {
         private static string connString;
         public DbSet<Member> Member { get; set; }
+        public DbSet<Token> Token { get; set; }
 
         private string GetConnectionString()
         {
@@ -18,7 +19,7 @@ namespace WonderAPI.Entities
                     connString = @"Data Source=.\sqlexpress; Initial Catalog=Wonder; Integrated Security=true;";
                 }
             }
-               
+
             return connString;
         }
 

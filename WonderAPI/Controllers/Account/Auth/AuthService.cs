@@ -25,19 +25,6 @@ namespace WonderAPI.Controllers.Account.Auth
     }
 
     /// <summary>
-    /// Represent token model
-    /// </summary>
-    public class Token
-    {
-        public int ID { get; set; }
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
-        public bool BlackListed { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime ExpiredAt { get; set; }
-    }
-
-    /// <summary>
     /// Specify functionality for working with token storage
     /// </summary>
     public interface ITokenRepository : IDisposable
