@@ -25,6 +25,14 @@ namespace WonderAPI
         }
 
         /// <summary>
+        /// Injects jwt handler
+        /// </summary>
+        private void InjectTokenHandler()
+        {
+            services.AddScoped<ISecurityTokenHandler, JWTHandler>();
+        }
+
+        /// <summary>
         /// Injects db context
         /// </summary>
         private void InjectDBContext()
@@ -49,6 +57,7 @@ namespace WonderAPI
         /// </summary>
         public void DoInjection()
         {
+            InjectTokenHandler();
             InjectDBContext();
             WireMemberService();
         }
