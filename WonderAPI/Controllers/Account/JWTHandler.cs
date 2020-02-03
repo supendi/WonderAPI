@@ -11,7 +11,7 @@ using WonderAPI.Entities;
 namespace WonderAPI.Controllers.Account
 {
     /// <summary>
-    /// Specify functionality to handle Token
+    /// Specify functionality Security Token Handler
     /// </summary>
     public interface ISecurityTokenHandler
     {
