@@ -28,6 +28,7 @@ namespace WonderAPI.Controllers.Account
     public class JWTGenerator : ITokenGenerator
     {
         static string secretKey = "";
+        static SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(GetSecretKey()));
 
         /// <summary>
         /// Returns secret key from env. If null return default key;
@@ -52,9 +53,6 @@ namespace WonderAPI.Controllers.Account
         /// <param name="services"></param>
         public static void RegisterAuth(IServiceCollection services)
         {
-            var jwtKey = Encoding.ASCII.GetBytes(GetSecretKey());
-            var securityKey = new SymmetricSecurityKey(jwtKey);
-
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -81,9 +79,6 @@ namespace WonderAPI.Controllers.Account
         /// <returns></returns>
         public string Generate(Member member)
         {
-            var jwtKey = Encoding.ASCII.GetBytes(GetSecretKey());
-            var securityKey = new SymmetricSecurityKey(jwtKey);
-
             var newToken = new JwtSecurityToken(
                 claims: new Claim[]
                 {
