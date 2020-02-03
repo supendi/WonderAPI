@@ -5,10 +5,14 @@ using System.Linq;
 namespace WonderAPI.Pkg
 {
     /// <summary>
-    /// A base class for internal controller.
+    /// A base class for api controller.
     /// </summary>
     public class ApiControllerBase : ControllerBase
     {
+        /// <summary>
+        /// Get token from current http request.
+        /// </summary>
+        /// <returns></returns>
         public JwtSecurityToken GetJWTToken()
         {
             var authHeaderValue = Request.Headers["Authorization"].FirstOrDefault();
@@ -23,6 +27,11 @@ namespace WonderAPI.Pkg
             return jwtToken;
         }
 
+        /// <summary>
+        /// Get token payload value by specified claim type/payload key
+        /// </summary>
+        /// <param name="claimType"></param>
+        /// <returns></returns>
         public string GetTokenPayloadValue(string claimType)
         {
             var token = GetJWTToken();
@@ -38,6 +47,10 @@ namespace WonderAPI.Pkg
             return claim.Value;
         }
 
+        /// <summary>
+        /// Get member id from access token
+        /// </summary>
+        /// <returns></returns>
         public int GetMemberIDFromToken()
         {
             var memberIDFromToken = GetTokenPayloadValue(JwtRegisteredClaimNames.Sub);
