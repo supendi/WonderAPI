@@ -87,7 +87,7 @@ namespace WonderAPI.Controllers.Account
             var newToken = new JwtSecurityToken(
                 claims: new Claim[]
                 {
-                    new Claim("memberId", member.ID.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Sub, member.ID.ToString()),
                     new Claim(JwtRegisteredClaimNames.GivenName, member.Name),
                     new Claim(JwtRegisteredClaimNames.Birthdate, member.DateOfBirth.ToString()),
                     new Claim(JwtRegisteredClaimNames.Gender, member.Gender),

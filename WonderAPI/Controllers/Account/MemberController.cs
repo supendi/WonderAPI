@@ -11,7 +11,7 @@ namespace WonderAPI.Controllers.Account
     [Route("api/members")]
     [ApiController]
     [ApiExceptionFilter]
-    public class MemberController : ControllerBase
+    public class MemberController : ApiControllerBase
     {
         /// <summary>
         /// When using this injected object, it is no need to use the 'using' keyword. 
@@ -58,6 +58,28 @@ namespace WonderAPI.Controllers.Account
         [Route("{memberId}")]
         public MemberInfo GetMemberInfo([FromRoute]int memberId)
         {
+            using (memberService)
+            {
+                var existingMember = memberService.GetMember(memberId);
+                return new MemberInfo
+                {
+                    ID = existingMember.ID,
+                    Name = existingMember.Name,
+                    Email = existingMember.Email,
+                    OptionalEmail = existingMember.OptionalEmail,
+                    MobileNumber = existingMember.MobileNumber,
+                    Gender = existingMember.Gender,
+                    DateOfBirth = existingMember.DateOfBirth
+                };
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("me")]
+        public MemberInfo GetCurrentMemberInfo()
+        {
+            var memberId = GetMemberIDFromToken();
             using (memberService)
             {
                 var existingMember = memberService.GetMember(memberId);
