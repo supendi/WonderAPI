@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace WonderAPI.Pkg
 {
+    /// <summary>
+    /// Filter known error or exception. If the exception is known, it will return a 400 response. 
+    /// Else (or unhandled exception) the response will be 500.
+    /// </summary>
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {
         public override void OnException(ExceptionContext context)
