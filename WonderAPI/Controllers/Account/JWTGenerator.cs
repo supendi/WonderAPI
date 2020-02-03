@@ -10,7 +10,7 @@ using WonderAPI.Entities;
 namespace WonderAPI.Controllers.Account
 {
     /// <summary>
-    /// Access token interface
+    /// Access token generator interface
     /// </summary>
     public interface ITokenGenerator
     {
