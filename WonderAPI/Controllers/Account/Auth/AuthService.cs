@@ -17,6 +17,9 @@ namespace WonderAPI.Controllers.Account.Auth
         }
     }
 
+    /// <summary>
+    /// Thrown if refresh token provided by user is invalid
+    /// </summary>
     public class InvalidTokenException : AppException
     {
         public InvalidTokenException() : base("Invalid token.")
