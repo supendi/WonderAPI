@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW1iZXJJZCI6IjEiLCJnaXZlbl9uYW1lIjoicGVuZGkiLCJiaXJ0aGRhdGUiOiIwMS8wMS8xOTgwIDAwOjAwOjAwIiwiZ2VuZGVyIjoiTWFsZSIsIm5iZiI6MTU4MDU3MDU4MiwiZXhwIjoxNTgwNTc0MTgyfQ.uICNfDD1iWMXKYORIlYH_MoiXjQH60H18tlXMlhb8KI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZ2l2ZW5fbmFtZSI6ImpvZSIsImJpcnRoZGF0ZSI6IjAxLzAxLzE5ODAgMDA6MDA6MDAiLCJnZW5kZXIiOiJsYWtpIiwibmJmIjoxNTgwNzg5Mzc1LCJleHAiOjE1ODA3OTI5NzV9.7U0RECg74x8S17WWOKtoIKjRE9VcZcr4YvXwYjfGC28",
 							"type": "string"
 						}
 					]
@@ -54,7 +54,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \r\n    \"name\": \"pendi\",\r\n    \"email\": \"pendi@email.com\",\r\n    \"optionalEmail\": \"\",\r\n    \"password\": \"pendi123\",\r\n    \"mobileNumber\": \"0813\",\r\n    \"gender\": \"laki\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
+					"raw": "{ \r\n    \"name\": \"joe\",\r\n    \"email\": \"joe@email.com\",\r\n    \"optionalEmail\": \"\",\r\n    \"password\": \"joe123\",\r\n    \"mobileNumber\": \"0813\",\r\n    \"gender\": \"laki\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,7 +88,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"pendi@email.com\",\n    \"password\": \"pendi123\"\n}",
+					"raw": "{\n    \"email\": \"joe@email.com\",\n    \"password\": \"joe123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,13 +96,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/api/members/auth",
+					"raw": "{{host}}/api/auth",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"members",
 						"auth"
 					]
 				}
@@ -117,7 +116,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW1iZXJJZCI6IjEiLCJnaXZlbl9uYW1lIjoicGVuZGkiLCJiaXJ0aGRhdGUiOiIwMS8wMS8xOTgwIDAwOjAwOjAwIiwiZ2VuZGVyIjoiTWFsZSIsIm5iZiI6MTU4MDU3MDU4MiwiZXhwIjoxNTgwNTc0MTgyfQ.uICNfDD1iWMXKYORIlYH_MoiXjQH60H18tlXMlhb8KI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZ2l2ZW5fbmFtZSI6ImpvZSIsImJpcnRoZGF0ZSI6IjAxLzAxLzE5ODAgMDA6MDA6MDAiLCJnZW5kZXIiOiJsYWtpIiwibmJmIjoxNTgwNzg5Mzc1LCJleHAiOjE1ODA3OTI5NzV9.7U0RECg74x8S17WWOKtoIKjRE9VcZcr4YvXwYjfGC28",
 							"type": "string"
 						}
 					]
@@ -133,7 +132,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Pendi\", \r\n    \"optionalEmail\": \"\", \r\n    \"gender\": \"Laki\",\r\n    \"mobileNumber\": \"123\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Pendi\",\r\n    \"email\": \"pendi@email.com\",\r\n    \"optionalEmail\": \"\",\r\n    \"mobileNumber\": \"123\",\r\n    \"gender\": \"Laki\",\r\n    \"dateOfBirth\": \"1980-01-01T00:00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -148,6 +147,75 @@
 					"path": [
 						"api",
 						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZ2l2ZW5fbmFtZSI6ImpvZSIsImJpcnRoZGF0ZSI6IjAxLzAxLzE5ODAgMDA6MDA6MDAiLCJnZW5kZXIiOiJsYWtpIiwibmJmIjoxNTgwNzg5Mzc1LCJleHAiOjE1ODA3OTI5NzV9.7U0RECg74x8S17WWOKtoIKjRE9VcZcr4YvXwYjfGC28",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/members/me",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"members",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZ2l2ZW5fbmFtZSI6ImpvZSIsImJpcnRoZGF0ZSI6IjAxLzAxLzE5ODAgMDA6MDA6MDAiLCJnZW5kZXIiOiJsYWtpIiwibmJmIjoxNTgwNzg5Mzc1LCJleHAiOjE1ODA3OTI5NzV9.7U0RECg74x8S17WWOKtoIKjRE9VcZcr4YvXwYjfGC28\",\r\n    \"refreshToken\": \"6e70ef7d-36d7-453f-b2ac-90003716920b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/refresh-token",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"refresh-token"
 					]
 				}
 			},
