@@ -162,7 +162,29 @@ namespace WonderAPI.Controllers.Tests
         [TestMethod()]
         public void RenewAccessTokenTest()
         {
-            //Assert.Fail();
+            var memberController = new MemberController(jwtHandler, GetMemberService());
+            var newMember = memberController.RegisterNewMember(new Member
+            {
+                ID = 1,
+                Name = "Anggie",
+                DateOfBirth = DateTime.Parse("1990-01-01"),
+                Email = "anggie@gmail.com",
+                Gender = "Female",
+                MobileNumber = "+123",
+                OptionalEmail = "",
+                Password = "myPasswordIsStrong"
+            });
+            LoginRequest loginRequest = new LoginRequest
+            {
+                Email = "anggie@gmail.com",
+                Password = "myPasswordIsStrong"
+            };
+            var authController = new AuthController(jwtHandler, GetAuthService());
+            var authInfo = authController.Authenticate(loginRequest);
+            var newAuthInfo = authController.RenewAccessToken(authInfo);
+            Assert.IsNotNull(newAuthInfo);
+            Assert.IsTrue(!string.IsNullOrEmpty(newAuthInfo.AccessToken));
+            Assert.IsTrue(!string.IsNullOrEmpty(newAuthInfo.RefreshToken));
         }
     }
 }
