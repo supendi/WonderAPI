@@ -24,5 +24,9 @@ There are two variables can/should be set in environment variables:
    - JWTGenerator.cs : set the jwt secret key
 4. Run the project
 
+## Unit test
+1. VS2019 : Open test explorer. Run all test.
+2. CLI : run command 'dotnet test' under project WonderApiTests
+
 ## Postman collection
 Yes, There is postman collection on this repository.
