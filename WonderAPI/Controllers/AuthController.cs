@@ -5,6 +5,9 @@ using WonderAPI.Pkg;
 
 namespace WonderAPI.Controllers
 {
+    /// <summary>
+    /// Auth API entry point
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [ApiExceptionFilter]
