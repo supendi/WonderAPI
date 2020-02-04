@@ -22,7 +22,7 @@ namespace WonderAPI.Controllers.Account.Auth
     /// </summary>
     public class InvalidTokenException : AppException
     {
-        public InvalidTokenException() : base("Invalid token.")
+        public InvalidTokenException(string message) : base(message)
         {
         }
     }
@@ -102,14 +102,14 @@ namespace WonderAPI.Controllers.Account.Auth
             var tokenRecord = tokenRepository.GetByRefreshToken(request.RefreshToken);
             if (tokenRecord == null)
             {
-                throw new InvalidTokenException();
+                throw new InvalidTokenException("Invalid refresh token.");
             }
 
             //Access token should be verified.
             //because on the token storage it's been save as a paired token (access and refresh token are saved together)
             if (tokenRecord.AccessToken != request.AccessToken)
             {
-                throw new InvalidTokenException();
+                throw new InvalidTokenException("Invalid access token.");
             }
 
             var memberID = tokenHandler.GetSubValue(tokenRecord.AccessToken);

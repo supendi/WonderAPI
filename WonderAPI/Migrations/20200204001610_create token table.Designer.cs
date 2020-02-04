@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WonderAPI.Entities;
 
 namespace WonderAPI.Migrations
 {
     [DbContext(typeof(WonderDBContext))]
-    partial class WonderDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200204001610_create token table")]
+    partial class createtokentable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

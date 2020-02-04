@@ -42,15 +42,54 @@ namespace WonderAPI
         }
 
         /// <summary>
+        /// Inject member repo
+        /// </summary>
+        private void InjectMemberRepo()
+        {
+            services.AddScoped<IMemberRepository, MemberRepository>();
+        }
+
+        /// <summary>
+        /// Inject token handler
+        /// </summary>
+        private void InjectJWTHandler()
+        {
+            services.AddScoped<ISecurityTokenHandler, JWTHandler>();
+        }
+
+        /// <summary>
+        /// Inject password hasher
+        /// </summary>
+        private void InjectPasswordHasher()
+        {
+            services.AddScoped<IPasswordHasher, BCryptHasher>();
+        }
+
+        /// <summary>
+        /// Inject token repo
+        /// </summary>
+        private void InjectTokenRepo()
+        {
+            services.AddScoped<ITokenRepository, TokenRepository>();
+        }
+
+        /// <summary>
         /// Member controller dependencies injection
         /// </summary>
         /// <param name="services"></param>
         private void WireMemberService()
         {
-            services.AddScoped<IMemberRepository, MemberRepository>();
-            services.AddScoped<IPasswordHasher, BCryptHasher>();
-            services.AddScoped<ISecurityTokenHandler, JWTHandler>();
             services.AddScoped<MemberService, MemberService>();
+        }
+
+        /// <summary>
+        /// Auth controller dependencies injection
+        /// </summary>
+        /// <param name="services"></param>
+        private void WireAuthService()
+        {
+            services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<AuthService, AuthService>();
         }
 
         /// <summary>
@@ -60,7 +99,11 @@ namespace WonderAPI
         {
             InjectTokenHandler();
             InjectDBContext();
+            InjectMemberRepo();
+            InjectJWTHandler();
+            InjectPasswordHasher();
             WireMemberService();
+            WireAuthService();
         }
     }
 }

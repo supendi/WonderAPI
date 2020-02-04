@@ -11,6 +11,7 @@ namespace WonderAPI.Controllers.Account.Auth
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExceptionFilter]
     public class AuthController : ApiControllerBase
     {
         private AuthService authService;
