@@ -3,6 +3,9 @@ using WonderAPI.Entities;
 
 namespace WonderAPI.Controllers.Account.SqlServer
 {
+    /// <summary>
+    /// Implement token repository by using SQL server as the data storage
+    /// </summary>
     public class TokenRepository : ITokenRepository
     {
         private WonderDBContext db;

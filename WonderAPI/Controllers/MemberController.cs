@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WonderAPI.Controllers.Account;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
 
-namespace WonderAPI.Controllers.Account
+namespace WonderAPI.Controllers
 {
     /// <summary>
     /// Member API entry point
@@ -58,20 +59,17 @@ namespace WonderAPI.Controllers.Account
         [Route("{memberId}")]
         public MemberInfo GetMemberInfo([FromRoute]int memberId)
         {
-            using (memberService)
+            var existingMember = memberService.GetMember(memberId);
+            return new MemberInfo
             {
-                var existingMember = memberService.GetMember(memberId);
-                return new MemberInfo
-                {
-                    ID = existingMember.ID,
-                    Name = existingMember.Name,
-                    Email = existingMember.Email,
-                    OptionalEmail = existingMember.OptionalEmail,
-                    MobileNumber = existingMember.MobileNumber,
-                    Gender = existingMember.Gender,
-                    DateOfBirth = existingMember.DateOfBirth
-                };
-            }
+                ID = existingMember.ID,
+                Name = existingMember.Name,
+                Email = existingMember.Email,
+                OptionalEmail = existingMember.OptionalEmail,
+                MobileNumber = existingMember.MobileNumber,
+                Gender = existingMember.Gender,
+                DateOfBirth = existingMember.DateOfBirth
+            };
         }
 
         [Authorize]
@@ -80,20 +78,17 @@ namespace WonderAPI.Controllers.Account
         public MemberInfo GetCurrentMemberInfo()
         {
             var memberId = GetMemberIDFromToken();
-            using (memberService)
+            var existingMember = memberService.GetMember(memberId);
+            return new MemberInfo
             {
-                var existingMember = memberService.GetMember(memberId);
-                return new MemberInfo
-                {
-                    ID = existingMember.ID,
-                    Name = existingMember.Name,
-                    Email = existingMember.Email,
-                    OptionalEmail = existingMember.OptionalEmail,
-                    MobileNumber = existingMember.MobileNumber,
-                    Gender = existingMember.Gender,
-                    DateOfBirth = existingMember.DateOfBirth
-                };
-            }
+                ID = existingMember.ID,
+                Name = existingMember.Name,
+                Email = existingMember.Email,
+                OptionalEmail = existingMember.OptionalEmail,
+                MobileNumber = existingMember.MobileNumber,
+                Gender = existingMember.Gender,
+                DateOfBirth = existingMember.DateOfBirth
+            };
         }
 
         /// <summary>

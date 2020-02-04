@@ -80,6 +80,4 @@ namespace WonderAPI.Controllers.Account.SqlServer
             db.Dispose();
         }
     }
-
-   
 }

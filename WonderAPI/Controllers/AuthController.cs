@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WonderAPI.Controllers.Account;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
 
-namespace WonderAPI.Controllers.Account
+namespace WonderAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
