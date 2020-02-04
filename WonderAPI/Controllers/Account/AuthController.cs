@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
 
-namespace WonderAPI.Controllers.Account.Auth
+namespace WonderAPI.Controllers.Account
 {
     [Route("api/[controller]")]
     [ApiController]

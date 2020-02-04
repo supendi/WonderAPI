@@ -25,6 +25,41 @@ namespace WonderAPI.Controllers.Account
     }
 
     /// <summary>
+    /// IMemberRepository is an interface for working with data storage such as SQL server
+    /// </summary>
+    public interface IMemberRepository : IRepository
+    {
+        /// <summary>
+        /// Add a new member
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        Member Add(Member member);
+
+        /// <summary>
+        /// Updates an existing member
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        Member Update(Member member);
+
+
+        /// <summary>
+        /// Get member info by member ID
+        /// </summary>
+        /// <param name="memberID"></param>
+        /// <returns></returns>
+        Member GetById(int memberID);
+
+        /// <summary>
+        /// Get member info by email 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        Member GetByEmail(string email);
+    }
+
+    /// <summary>
     /// Provide the Member business functionality based on requirement such as create, update and get member info.
     /// It implements IDisposable, the main reason is to dispose the repository object.
     /// </summary>

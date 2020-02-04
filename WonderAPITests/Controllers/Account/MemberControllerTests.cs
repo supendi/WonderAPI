@@ -1,12 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WonderAPI.Controllers.Account;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using WonderAPI.Controllers.Account.Inmem;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
-using System.Linq;
-using WonderAPI.Controllers.Account.Auth;
 
 namespace WonderAPI.Controllers.Account.Tests
 {
@@ -32,7 +30,7 @@ namespace WonderAPI.Controllers.Account.Tests
                  }
             };
 
-            var service = new MemberService(new MemberInmemRepository(initialData), new BCryptHasher());
+            var service = new MemberService(new MemberRepository(initialData), new BCryptHasher());
             return service;
         }
 

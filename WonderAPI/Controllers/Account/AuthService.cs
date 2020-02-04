@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
 
-namespace WonderAPI.Controllers.Account.Auth
+namespace WonderAPI.Controllers.Account
 {
     /// <summary>
     /// This exeption will be thrown if user failed to login

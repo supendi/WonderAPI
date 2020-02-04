@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using WonderAPI.Entities;
 
-namespace WonderAPI.Controllers.Account.Auth
+namespace WonderAPI.Controllers.Account.SqlServer
 {
     public class TokenRepository : ITokenRepository
     {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using WonderAPI.Controllers.Account.Inmem;
 
 namespace WonderAPI.Controllers.Account.Tests
 {
@@ -32,14 +33,14 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void MemberInmemRepositoryTest()
         {
-            var repo = new MemberInmemRepository(InitializeData());
+            var repo = new MemberRepository(InitializeData());
             Assert.IsTrue(repo.Members.Count() == 1);
         }
 
         [TestMethod()]
         public void AddTest()
         {
-            var repo = new MemberInmemRepository(InitializeData());
+            var repo = new MemberRepository(InitializeData());
             repo.Add(new Entities.Member()
             {
                 Name = "Anna",
@@ -58,7 +59,7 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void GetByEmailTest()
         {
-            var repo = new MemberInmemRepository(InitializeData());
+            var repo = new MemberRepository(InitializeData());
             var someMember = repo.GetByEmail("john.doe@email.com");
             Assert.AreEqual("john.doe@email.com", someMember.Email);
         }
@@ -66,7 +67,7 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void GetByIdTest()
         {
-            var repo = new MemberInmemRepository(InitializeData());
+            var repo = new MemberRepository(InitializeData());
             var someMember = repo.GetById(1);
             Assert.AreEqual(1, someMember.ID);
         }
@@ -74,7 +75,7 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void UpdateTest()
         {
-            var repo = new MemberInmemRepository(InitializeData());
+            var repo = new MemberRepository(InitializeData());
             var existingMember = new Entities.Member()
             {
                 ID = 1,
@@ -96,7 +97,7 @@ namespace WonderAPI.Controllers.Account.Tests
         [TestMethod()]
         public void DisposeTest()
         {
-            var repo = new MemberInmemRepository(InitializeData());
+            var repo = new MemberRepository(InitializeData());
             repo.Dispose();
             Assert.IsNull(repo.Members);
         }

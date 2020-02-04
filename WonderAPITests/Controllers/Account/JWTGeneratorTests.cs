@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WonderAPI.Controllers.Account;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using WonderAPI.Controllers.Account.Auth;
 
 namespace WonderAPI.Controllers.Account.Tests
 {

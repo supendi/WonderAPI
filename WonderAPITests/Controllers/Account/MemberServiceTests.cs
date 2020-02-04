@@ -1,16 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WonderAPI.Controllers.Account;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using WonderAPI.Controllers.Account.Auth;
+using WonderAPI.Controllers.Account.Inmem;
 
 namespace WonderAPI.Controllers.Account.Tests
 {
     [TestClass()]
     public class MemberServiceTests
     {
-        MemberInmemRepository repo = new MemberInmemRepository(new List<Entities.Member>());
+        MemberRepository repo = new MemberRepository(new List<Entities.Member>());
         IPasswordHasher hasher = new BCryptHasher();
         ISecurityTokenHandler tokenGenerator = new JWTHandler();
 

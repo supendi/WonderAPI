@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using WonderAPI.Controllers.Account;
-using WonderAPI.Controllers.Account.Auth;
 
 namespace WonderAPI.Pkg
 {
@@ -36,7 +34,7 @@ namespace WonderAPI.Pkg
         /// Get member id from access token
         /// </summary>
         /// <returns></returns>
-        public int GetMemberIDFromToken()
+        protected int GetMemberIDFromToken()
         {
             return tokenHandler.GetSubValue(GetAuthorizationHeaderValue());
         }
