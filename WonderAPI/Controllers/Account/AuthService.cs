@@ -36,7 +36,7 @@ namespace WonderAPI.Controllers.Account
     }
 
     /// <summary>
-    /// Specify
+    /// Application authentication 
     /// </summary>
     public class AuthService : IDisposable
     {
@@ -71,7 +71,7 @@ namespace WonderAPI.Controllers.Account
             var now = DateTime.Now;
             var newAccessToken = tokenHandler.GenerateAccessToken(member);
             var newRefreshToken = tokenHandler.GenerateRefreshToken();
-            
+
             tokenRepository.Add(new Token()
             {
                 AccessToken = newAccessToken,
@@ -109,6 +109,16 @@ namespace WonderAPI.Controllers.Account
                 throw new InvalidTokenException("Invalid access token.");
             }
 
+            if (tokenRecord.BlackListed)
+            {
+                throw new InvalidTokenException("Token is blacklisted.");
+            }
+
+            if (tokenRecord.ExpiredAt.Subtract(DateTime.Now).TotalSeconds <= 0)
+            {
+                throw new InvalidTokenException("Refresh token is expired.");
+            }
+
             var memberID = tokenHandler.GetSubValue(tokenRecord.AccessToken);
             var member = memberRepository.GetById(memberID);
             if (member == null)
@@ -135,7 +145,7 @@ namespace WonderAPI.Controllers.Account
                 AccessToken = newAccessToken,
                 RefreshToken = newRefreshToken
             };
-        } 
+        }
 
         public void Dispose()
         {
