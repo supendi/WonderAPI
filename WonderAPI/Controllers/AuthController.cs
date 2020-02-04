@@ -33,7 +33,7 @@ namespace WonderAPI.Controllers
         }
 
         /// <summary>
-        /// Authorize user by providing username and password
+        /// Renew access token by providing its access token and refresh token
         /// </summary>
         /// <param name="loginRequest"></param>
         /// <returns></returns>
