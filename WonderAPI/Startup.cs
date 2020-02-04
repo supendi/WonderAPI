@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WonderAPI.Controllers.Account;
+using WonderAPI.Controllers.Account.Auth;
 
 namespace WonderAPI
 {

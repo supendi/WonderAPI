@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using WonderAPI.Entities;
 
-namespace WonderAPI.Controllers.Account
+namespace WonderAPI.Controllers.Account.Auth
 {
     /// <summary>
     /// Specify functionality Security Token Handler

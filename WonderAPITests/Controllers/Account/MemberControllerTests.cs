@@ -6,6 +6,7 @@ using System.Text;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
 using System.Linq;
+using WonderAPI.Controllers.Account.Auth;
 
 namespace WonderAPI.Controllers.Account.Tests
 {

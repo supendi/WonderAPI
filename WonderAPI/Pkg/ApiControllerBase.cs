@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using WonderAPI.Controllers.Account;
+using WonderAPI.Controllers.Account.Auth;
 
 namespace WonderAPI.Pkg
 {

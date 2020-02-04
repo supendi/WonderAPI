@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WonderAPI.Controllers.Account.Auth;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
 
