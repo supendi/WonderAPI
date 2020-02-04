@@ -30,7 +30,7 @@ namespace WonderAPI.Controllers.Account.Auth
     public interface ITokenRepository : IDisposable
     {
         Token Add(Token token);
-        Token Delete(int tokenID);
+        void Delete(int tokenID);
         Token BlackList(int tokenID);
         Token GetByRefreshToken(string refreshToken);
     }
