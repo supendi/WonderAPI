@@ -6,13 +6,13 @@ using System.Linq;
 namespace WonderAPI.Controllers.Account.Tests
 {
     [TestClass()]
-    public class JWTGeneratorTests
+    public class JWTHandlerTests
     {
         [TestMethod()]
         public void GenerateTest()
         {
-            var generator = new JWTHandler();
-            var token = generator.GenerateAccessToken(new Entities.Member()
+            var tokenHandler = new JWTHandler();
+            var token = tokenHandler.GenerateAccessToken(new Entities.Member()
             {
                 ID = 1,
                 Name = "John Doe",

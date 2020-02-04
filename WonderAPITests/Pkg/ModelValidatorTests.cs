@@ -1,10 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WonderAPI.Pkg;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using WonderAPI.Entities;
 using System.Linq;
+using WonderAPI.Entities;
 
 namespace WonderAPI.Pkg.Tests
 {

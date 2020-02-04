@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WonderAPI.Controllers.Account;
 using WonderAPI.Controllers.Account.Inmem;
 using WonderAPI.Entities;
 using WonderAPI.Pkg;
 
-namespace WonderAPI.Controllers.Account.Tests
+namespace WonderAPI.Controllers.Tests
 {
     [TestClass()]
     public class MemberControllerTests
@@ -14,7 +15,6 @@ namespace WonderAPI.Controllers.Account.Tests
         private JWTHandler jwtHandler = new JWTHandler();
         private MemberService GetMemberService()
         {
-
             var initialData = new List<Member>()
             {
                  new Member
@@ -206,99 +206,5 @@ namespace WonderAPI.Controllers.Account.Tests
                 Assert.IsTrue(vex.ValidationResult.Errors.Where(x => x.Field == nameof(Member.MobileNumber)).Count() == 1);
             }
         }
-
-        //[TestMethod()]
-        //public void AuthenticateTest()
-        //{
-        //    var ctrl = new MemberController(GetMemberService());
-        //    var newMember = ctrl.RegisterNewMember(new Member
-        //    {
-        //        ID = 1,
-        //        Name = "Wawan",
-        //        DateOfBirth = DateTime.Parse("1990-01-01"),
-        //        Email = "wawan@gmail.com",
-        //        Gender = "Male",
-        //        MobileNumber = "+123",
-        //        OptionalEmail = "",
-        //        Password = "myPasswordIsStrong"
-        //    });
-        //    LoginRequest loginRequest = new LoginRequest
-        //    {
-        //        Email = newMember.Email,
-        //        Password = "myPasswordIsStrong"
-        //    };
-        //    var authInfo = ctrl.Authenticate(loginRequest);
-
-        //    Assert.IsNotNull(authInfo);
-        //    Assert.IsTrue(!string.IsNullOrEmpty(authInfo.AccessToken));
-        //}
-
-        //[TestMethod()]
-        //public void AuthenticateFailInvalidEmailTest()
-        //{
-        //    try
-        //    {
-        //        var ctrl = new MemberController(GetMemberService());
-        //        var newMember = ctrl.RegisterNewMember(new Member
-        //        {
-        //            ID = 1,
-        //            Name = "Wawan",
-        //            DateOfBirth = DateTime.Parse("1990-01-01"),
-        //            Email = "wawan@gmail.com",
-        //            Gender = "Male",
-        //            MobileNumber = "+123",
-        //            OptionalEmail = "",
-        //            Password = "myPasswordIsStrong"
-        //        });
-        //        LoginRequest loginRequest = new LoginRequest
-        //        {
-        //            Email = "invalid@email.com",
-        //            Password = "myPasswordIsStrong"
-        //        };
-        //        var authInfo = ctrl.Authenticate(loginRequest);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Assert.IsTrue(ex is AuthenticationException);
-        //    }
-        //}
-
-        //[TestMethod()]
-        //public void AuthenticateFailValidationTest()
-        //{
-        //    try
-        //    {
-        //        var ctrl = new MemberController(GetMemberService());
-        //        var newMember = ctrl.RegisterNewMember(new Member
-        //        {
-        //            ID = 1,
-        //            Name = "Wawan",
-        //            DateOfBirth = DateTime.Parse("1990-01-01"),
-        //            Email = "wawan@gmail.com",
-        //            Gender = "Male",
-        //            MobileNumber = "+123",
-        //            OptionalEmail = "",
-        //            Password = "myPasswordIsStrong"
-        //        });
-        //        LoginRequest loginRequest = new LoginRequest
-        //        {
-        //            Email = "",
-        //            Password = "myPasswordIsStrong"
-        //        };
-        //        var authInfo = ctrl.Authenticate(loginRequest);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Assert.IsTrue(ex is ValidationException);
-        //        var vex = ex as ValidationException;
-        //        //error count is only 1
-        //        Assert.IsTrue(vex.ValidationResult.Errors.Count == 1);
-
-        //        //and the error is caused by empty name
-        //        Assert.IsTrue(vex.ValidationResult.Errors.Where(x => x.Field == nameof(Member.Email)).Count() == 1);
-        //    }
-        //}
     }
 }

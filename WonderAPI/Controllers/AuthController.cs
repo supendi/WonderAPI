@@ -39,10 +39,10 @@ namespace WonderAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("refresh-token")]
-        public AuthInfo RenewAccessToken([FromBody]AuthInfo authInfo)
+        public AuthInfo RenewAccessToken([FromBody]AuthInfo request)
         {
-            ModelValidator.Validate(authInfo);
-            return authService.RenewAccessToken(authInfo);
+            ModelValidator.Validate(request); 
+            return authService.RenewAccessToken(request);
         }
     }
 }

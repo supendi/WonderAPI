@@ -5,19 +5,19 @@ using WonderAPI.Entities;
 namespace WonderAPI.Controllers.Account.Inmem
 {
     /// <summary>
-    /// In memory token repository which use memory as storage.
+    /// In memory member repository which use memory as storage.
     /// </summary>
-    public class TokenRepository : ITokenRepository
+    public class MemberRepository : IMemberRepository
     {
-        public List<Token> Tokens { get; set; }
+        public List<Member> Members { get; set; }
 
         /// <summary>
         /// Create new inmem instance with initial data
         /// </summary>
-        /// <param name="tokens"></param>
-        public TokenRepository(List<Token> tokens)
+        /// <param name="members"></param>
+        public MemberRepository(List<Member> members)
         {
-            this.Tokens = tokens;
+            this.Members = members;
         }
 
         /// <summary>
@@ -26,11 +26,11 @@ namespace WonderAPI.Controllers.Account.Inmem
         /// <returns></returns>
         private int GetLastID()
         {
-            if (Tokens == null || Tokens.Count == 0)
+            if (Members == null || Members.Count == 0)
             {
                 return 0;
             }
-            return Tokens.OrderByDescending(x => x.ID).FirstOrDefault().ID;
+            return Members.OrderByDescending(x => x.ID).FirstOrDefault().ID;
         }
 
         /// <summary>
@@ -44,57 +44,61 @@ namespace WonderAPI.Controllers.Account.Inmem
 
 
         /// <summary>
-        /// Add new token into memory
+        /// Add new member into memory
         /// </summary>
-        /// <param name="token"></param>
+        /// <param name="member"></param>
         /// <returns></returns>
-        public Token Add(Token token)
+        public Member Add(Member member)
         {
-            token.ID = GetNextID();
-            this.Tokens.Add(token);
-            return token;
+            member.ID = GetNextID();
+            this.Members.Add(member);
+            return member;
         }
 
         /// <summary>
-        /// Get token by its email
+        /// Get member by its email
         /// </summary>
-        /// <param name="refreshToken"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
-        public Token GetByRefreshToken(string refreshToken)
+        public Member GetByEmail(string email)
         {
-            if (Tokens == null || Tokens.Count == 0)
+            if (Members == null || Members.Count == 0)
             {
                 return null;
             }
-            return Tokens.FirstOrDefault(x => x.RefreshToken == refreshToken);
+            return Members.FirstOrDefault(x => x.Email == email);
         }
 
         /// <summary>
-        /// Get token by its ID
+        /// Get member by its ID
         /// </summary>
-        /// <param name="tokenID"></param>
+        /// <param name="memberID"></param>
         /// <returns></returns>
-        public Token GetById(int tokenID)
+        public Member GetById(int memberID)
         {
-            if (Tokens == null || Tokens.Count == 0)
+            if (Members == null || Members.Count == 0)
             {
                 return null;
             }
-            return Tokens.FirstOrDefault(x => x.ID == tokenID);
+            return Members.FirstOrDefault(x => x.ID == memberID);
         }
 
         /// <summary>
-        /// Blacklist existing token
+        /// Updates existing member
         /// </summary>
-        /// <param name="token"></param>
+        /// <param name="member"></param>
         /// <returns></returns>
-        public Token BlackList(int tokenID)
+        public Member Update(Member member)
         {
-            foreach (var element in Tokens)
+            foreach (var element in Members)
             {
-                if (element.ID == tokenID)
+                if (element.ID == member.ID)
                 {
-                    element.BlackListed = true;
+                    element.Name = member.Name;
+                    element.OptionalEmail = member.OptionalEmail;
+                    element.MobileNumber = member.MobileNumber;
+                    element.DateOfBirth = member.DateOfBirth;
+                    element.Gender = member.Gender;
                     return element;
                 }
             }
@@ -102,32 +106,11 @@ namespace WonderAPI.Controllers.Account.Inmem
         }
 
         /// <summary>
-        /// Blacklist existing token
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public void Delete(int tokenID)
-        {
-            Token token = null;
-            foreach (var element in Tokens)
-            {
-                if (element.ID == tokenID)
-                {
-                    element.BlackListed = true;
-                    token = element;
-                    break;
-                }
-            }
-            if (token != null)
-                Tokens.Remove(token);
-        }
-
-        /// <summary>
         /// Dispose data
         /// </summary>
         public void Dispose()
         {
-            this.Tokens = null;
+            this.Members = null;
         }
     }
 }

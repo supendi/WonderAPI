@@ -1,12 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WonderAPI.Controllers.Account;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using WonderAPI.Controllers.Account.Inmem;
 
-namespace WonderAPI.Controllers.Account.Tests
+namespace WonderAPI.Controllers.Account.Inmem.Tests
 {
     [TestClass()]
     public class MemberInmemRepositoryTests
@@ -28,8 +25,8 @@ namespace WonderAPI.Controllers.Account.Tests
             });
 
             return data;
-
         }
+
         [TestMethod()]
         public void MemberInmemRepositoryTest()
         {

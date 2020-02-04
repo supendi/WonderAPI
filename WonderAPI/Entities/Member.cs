@@ -78,7 +78,6 @@ namespace WonderAPI.Entities
         public DateTime DateOfBirth { get; set; }
     }
 
-
     /// <summary>
     /// Represent MemberInfo model, it's actually a Member model, but without password
     /// </summary>
@@ -91,28 +90,5 @@ namespace WonderAPI.Entities
         public string MobileNumber { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-    }
-
-
-    /// <summary>
-    /// Represent the login model
-    /// </summary>
-    public class LoginRequest
-    {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Required]
-        public string Password { get; set; }
-    }
-
-    /// <summary>
-    /// Represent the response model if a user successfully authenticated
-    /// </summary>
-    public class AuthInfo
-    {
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
-    }
+    } 
 }

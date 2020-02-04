@@ -15,5 +15,16 @@ namespace WonderAPI.Controllers.Account.Tests
 
             Assert.IsTrue(hasher.Verify(password, hashedPassword));
         }
+
+        [TestMethod()]
+        public void VerifyTest()
+        {
+            var hasher = new BCryptHasher();
+
+            var password = "aW3akp455w0rD";
+            var hashedPassword = hasher.Hash(password);
+
+            Assert.IsTrue(hasher.Verify(password, hashedPassword));
+        }
     }
 }
